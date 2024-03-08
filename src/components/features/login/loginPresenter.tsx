@@ -1,7 +1,15 @@
 import { Button, TextField, Typography } from '@mui/material'
 import { styled } from '@mui/system'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { type FC } from 'react'
+
+type LoginProps = {
+  email: string
+  password: string
+  setEmail: (email: string) => void
+  setPassword: (password: string) => void
+  navigate: () => void
+  submitAuthhandler: (e: React.FormEvent<HTMLFormElement>) => void
+}
 
 const LoginCard = styled('div')({
   position: 'fixed',
@@ -25,13 +33,16 @@ const RightAlignedButton = styled(Button)({
   paddingRight: '0', // ボタンの右側の余白を0に設定
 })
 
-const LoginPresenter = (prop: object) => {
-  const navigate = useNavigate()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
+const LoginPresenter: FC<LoginProps> = ({
+  email,
+  password,
+  setEmail,
+  setPassword,
+  navigate,
+  submitAuthhandler,
+}) => {
   return (
-    <form onSubmit={() => prop}>
+    <form onSubmit={submitAuthhandler}>
       <LoginCard>
         <Typography variant="h5" gutterBottom style={{ textAlign: 'center' }}>
           ログイン
@@ -41,9 +52,8 @@ const LoginPresenter = (prop: object) => {
           margin="normal"
           fullWidth
           label="メールアドレス"
-          value={
-          }
-          onClick={(e) => setEmail(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
           variant="outlined"
@@ -51,18 +61,13 @@ const LoginPresenter = (prop: object) => {
           fullWidth
           label="パスワード"
           type="password"
-          onClick={}
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
         />
         <Button variant="contained" color="primary" fullWidth type="submit">
           ログイン
         </Button>
-        <RightAlignedButton
-          variant="text"
-          onClick={loginMutation.mutate({
-            email: email,
-            password: pw,
-          })}
-        >
+        <RightAlignedButton variant="text" onClick={navigate}>
           新規登録画面へ
         </RightAlignedButton>
       </LoginCard>

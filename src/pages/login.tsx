@@ -1,3 +1,5 @@
-export const Login = () => {
-  return <div>login</div>
+import { LoginContainer } from '../components/features/login/loginContainer'
+
+export default function Login() {
+  return <LoginContainer />
 }
