@@ -1,6 +1,7 @@
 import { Button, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const LoginCard = styled('div')({
     position: 'fixed',
@@ -19,6 +20,10 @@ const LoginCard = styled('div')({
 });
 
 const SigninPresenter = () => {
+    // const [image, setImage] = useState('')
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const navigate = useNavigate()
     return (
        <form>
@@ -40,9 +45,9 @@ const SigninPresenter = () => {
                     画像を選択
                 </Button>
             </div>
-            <TextField variant="outlined" margin="normal" fullWidth label="ユーザー名" />
-            <TextField variant="outlined" margin="normal" fullWidth label="メールアドレス" type="password" />
-            <TextField variant="outlined" margin="normal" fullWidth label="パスワード" type="password" />
+            <TextField variant="outlined" margin="normal" fullWidth label="ユーザー名" value={name} onChange={(e) => setName(e.target.value)}/>
+            <TextField variant="outlined" margin="normal" fullWidth label="メールアドレス" type="password" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <TextField variant="outlined" margin="normal" fullWidth label="パスワード" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
             <Button variant="contained" style={{ backgroundColor: '#BF0023' }} fullWidth>
                 新規会員登録する
             </Button>

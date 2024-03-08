@@ -1,6 +1,7 @@
 import { Button, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const LoginCard = styled('div')({
     position: 'fixed',
@@ -18,30 +19,29 @@ const LoginCard = styled('div')({
     },
 });
 
-const RightAlignedButton = styled(Button)({
-    textAlign: 'right',
-    marginTop: '10px',
-    paddingRight: '0', // ボタンの右側の余白を0に設定
-});
-
 const LoginPresenter = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     const navigate = useNavigate()
     return (
-        <LoginCard>
-            <Typography variant="h5" gutterBottom style={{ textAlign: 'center' }}>
-                ログイン
-            </Typography>
-            <TextField variant="outlined" margin="normal" fullWidth label="メールアドレス" />
-            <TextField variant="outlined" margin="normal" fullWidth label="パスワード" type="password" />
-            <Button variant="contained" color="primary" style={{ backgroundColor: '#BF0023' }} fullWidth>
-                ログイン
-            </Button>
-            <div style={{ textAlign: 'right', width: '100%' }}>
-                <Button variant="text" style={{ justifyContent: 'flex-start', color: '#BF0023' }} onClick={()=> navigate('/signin')} >
-                    新規会員登録画面へ
+        <form >
+            <LoginCard>
+                <Typography variant="h5" gutterBottom style={{ textAlign: 'center' }}>
+                    ログイン
+                </Typography>
+                <TextField variant="outlined" margin="normal" fullWidth label="メールアドレス" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <TextField variant="outlined" margin="normal" fullWidth label="パスワード" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <Button variant="contained" color="primary" style={{ backgroundColor: '#BF0023' }} fullWidth>
+                    ログイン
                 </Button>
-            </div>
-        </LoginCard>
+                <div style={{ textAlign: 'right', width: '100%' }}>
+                    <Button variant="text" style={{ justifyContent: 'flex-start', color: '#BF0023' }} onClick={() => navigate('/signin')} >
+                        新規会員登録画面へ
+                    </Button>
+                </div>
+            </LoginCard>
+        </form>
     );
 }
 

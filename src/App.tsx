@@ -1,6 +1,4 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Login } from './pages/login'
-import { Singnup } from './pages/singnup'
 import { Home } from './pages/home'
 import { useEffect } from 'react'
 import axios from 'axios'
