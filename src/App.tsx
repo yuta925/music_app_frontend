@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Login } from './pages/login'
-import { Singnup } from './pages/singnup'
 import { Home } from './pages/home'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { CsrfToken } from './types'
+import LoginPresenter from './components/features/login/loginPresenter'
+import SigninPresenter from './components/features/signin/signinPresenter'
 
 const App = () => {
   useEffect(()=> {
@@ -22,8 +22,8 @@ const App = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Singnup />} />
+          <Route path="/" element={<LoginPresenter />} />
+          <Route path="/signin" element={<SigninPresenter />} />
           <Route path="/home" element={<Home />} />
         </Routes>
       </BrowserRouter>
