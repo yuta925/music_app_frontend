@@ -1,5 +1,6 @@
 import { Button, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/system';
+import { useNavigate } from 'react-router-dom';
 
 const LoginCard = styled('div')({
     position: 'fixed',
@@ -23,7 +24,8 @@ const RightAlignedButton = styled(Button)({
     paddingRight: '0', // ボタンの右側の余白を0に設定
 });
 
-function Login() {
+const LoginPresenter = () => {
+    const navigate = useNavigate()
     return (
         <LoginCard>
             <Typography variant="h5" gutterBottom style={{ textAlign: 'center' }}>
@@ -31,14 +33,16 @@ function Login() {
             </Typography>
             <TextField variant="outlined" margin="normal" fullWidth label="ユーザー名" />
             <TextField variant="outlined" margin="normal" fullWidth label="パスワード" type="password" />
-            <Button variant="contained" color="primary" fullWidth>
+            <Button variant="contained" color="primary" style={{ backgroundColor: '#BF0023' }} fullWidth>
                 ログイン
             </Button>
-            <RightAlignedButton variant="text">
-                新規登録画面へ
-            </RightAlignedButton>
+            <div style={{ textAlign: 'right', width: '100%' }}>
+                <Button variant="text" style={{ justifyContent: 'flex-start', color: '#BF0023' }} onClick={()=> navigate('/signin')} >
+                    新規会員登録画面へ
+                </Button>
+            </div>
         </LoginCard>
     );
 }
 
-export default Login;
+export default LoginPresenter;
