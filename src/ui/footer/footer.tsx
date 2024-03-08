@@ -5,7 +5,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 // import IconButton from "@mui/material/IconButton";
 
-export default function BoxSx() {
+export default function Footer() {
   return (
       <Box
         position="fixed"
