@@ -31,7 +31,7 @@ const LoginPresenter = () => {
             <Typography variant="h5" gutterBottom style={{ textAlign: 'center' }}>
                 ログイン
             </Typography>
-            <TextField variant="outlined" margin="normal" fullWidth label="ユーザー名" />
+            <TextField variant="outlined" margin="normal" fullWidth label="メールアドレス" />
             <TextField variant="outlined" margin="normal" fullWidth label="パスワード" type="password" />
             <Button variant="contained" color="primary" style={{ backgroundColor: '#BF0023' }} fullWidth>
                 ログイン
