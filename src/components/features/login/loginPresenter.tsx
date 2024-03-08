@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Button, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 
 const LoginCard = styled('div')({
