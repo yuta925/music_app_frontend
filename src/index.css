@@ -1,3 +1,4 @@
-@tailwind base;
+@tailwind base; /* MUIと噛み合わなくなったらみてみる */
 @tailwind components;
 @tailwind utilities;
+
