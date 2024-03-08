@@ -1,9 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-
-type CsrfToken = {
-  csrf_token: string
-}
+import { CsrfToken } from '../types'
 
 export const useError = () => {
   const navigate = useNavigate()
