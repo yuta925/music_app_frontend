@@ -1,8 +1,6 @@
-import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
-import { useState } from 'react'
 import { ProfilePresenter } from './ProfilePresenter'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
 type UserProfile = {
   user_icon: string
@@ -10,15 +8,24 @@ type UserProfile = {
 }
 
 export const ProfileContainer = () => {
-  const navigate = useNavigate()
-  const [userIcon, setUserIcon] = useState('')
-  const [userName, setUserName] = useState('')
-  const getUserProfile = async () => {
-    const { data } = await axios.get<UserProfile>(
-      `${import.meta.env.VITE_APP_API}/user/profile`
-    )
-    return data
-  }
+  const [user_icon, setUserIcon] = useState('src/assets/images/default.png')
+  const [user_name, setUserName] = useState('yuta')
+  useEffect(() => {
+    const getProufile = async () => {
+      const response = await axios.get<UserProfile>(
+        `${import.meta.env.VITE_APP_API}/user/profile`
+      )
+      return response.data
+    }
 
-  return <ProfilePresenter />
+    const fetchProfile = async () => {
+      const userInfo = await getProufile()
+      setUserIcon(userInfo.user_icon)
+      setUserName(userInfo.user_name)
+    }
+
+    fetchProfile()
+  }, [])
+
+  return <ProfilePresenter user_icon={user_icon} user_name={user_name} />
 }

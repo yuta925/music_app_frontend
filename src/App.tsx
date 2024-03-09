@@ -7,8 +7,7 @@ import Login from './pages/login'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Signup from './pages/signup'
 import { BulletinBoardPresenter } from './components/features/bulletinBoardCreate/bulletinBoardCreatePresenter'
-import { ProfilePresenter } from './components/features/Profile/ProfilePresenter'
-
+import { Profile } from './pages/profile'
 const App = () => {
   const queryClient = new QueryClient()
 
@@ -32,7 +31,7 @@ const App = () => {
             <Route path="/signin" element={<Signup />} />
             {/* <Route path={`/home/${date}/${artist}`} element={<Home />} /> */}
             <Route path={'/create'} element={<BulletinBoardPresenter />} />
-            <Route path={'/profile'} element={<ProfilePresenter />} />
+            <Route path={'/profile'} element={<Profile />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
