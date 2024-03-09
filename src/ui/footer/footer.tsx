@@ -7,7 +7,6 @@ import EditNoteIcon from '@mui/icons-material/EditNote'
 export default function Footer() {
   return (
     <Box
-      position="fixed"
       sx={{
         //   '& button':{m: 1},
         borderTop: '2px solid white',
