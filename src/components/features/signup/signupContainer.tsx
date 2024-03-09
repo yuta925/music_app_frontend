@@ -27,10 +27,7 @@ export const SignupContainer = () => {
 
   const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return
-
-    // React.ChangeEvent<HTMLInputElement>よりファイルを取得
     const fileObject = e.target.files[0]
-    // オブジェクトURLを生成し、useState()を更新
     setIcon(window.URL.createObjectURL(fileObject))
   }
 
@@ -38,16 +35,12 @@ export const SignupContainer = () => {
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault()
-    await register
-      .mutateAsync({
-        icon: icon,
-        name: name,
-        email: email,
-        password: password,
-      })
-      .then(() => {
-        navigate('/home')
-      })
+    await register.mutateAsync({
+      icon: icon,
+      name: name,
+      email: email,
+      password: password,
+    })
   }
   return (
     <SignupPresenter

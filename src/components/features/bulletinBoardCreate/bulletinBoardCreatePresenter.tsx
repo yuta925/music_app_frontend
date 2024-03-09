@@ -5,8 +5,8 @@ import BasicSelect from '../../../ui/select/selectbox'
 import { useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import IconButton from '@mui/material/IconButton';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import IconButton from '@mui/material/IconButton'
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import SelectLocation from '../../../ui/selectlocation'
 // type BulletinBoardCreateProps = {
 //   live_image: string
@@ -50,7 +50,6 @@ export const BulletinBoardPresenter = () =>
       const fileObject = e.target.files[0]
       setIcon(window.URL.createObjectURL(fileObject))
     }
-
     return (
       <div>
         <div className="flex flex-col justify-center items-center">
@@ -62,27 +61,27 @@ export const BulletinBoardPresenter = () =>
             className="w-full px-2"
           />
         </div>
-    <div>
-        {/* <Autocomplete
+        <div>
+          {/* <Autocomplete
           disablePortal
           id="combo-box-demo"
           options={location}
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="会場名" />}
         /> */}
-        <SelectLocation />
-        <div className="text-center">
-          <DatePicker
-            selected={date}
-            onChange={(selectedDate) => setDate(selectedDate || Today)}
-            dateFormat="yyyy/MM/dd"
-          />
-        </div>
-        <BasicSelect />
-        <IconButton>
+          <SelectLocation />
+          <div className="text-center">
+            <DatePicker
+              selected={date}
+              onChange={(selectedDate) => setDate(selectedDate || Today)}
+              dateFormat="yyyy/MM/dd"
+            />
+          </div>
+          <BasicSelect />
+          <IconButton>
             <AddCircleOutlineIcon />
-        </IconButton>
-      </div>
+          </IconButton>
+        </div>
       </div>
     )
   }
