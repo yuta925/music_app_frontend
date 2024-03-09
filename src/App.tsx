@@ -6,8 +6,8 @@ import { CsrfToken } from './types'
 import Login from './pages/login'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Signup from './pages/signup'
-import { BulletinBoardPresenter } from './components/features/bulletinBoardCreate/bulletinBoardCreatePresenter'
 import { Profile } from './pages/profile'
+import { Create } from './pages/create'
 const App = () => {
   const queryClient = new QueryClient()
 
@@ -30,9 +30,8 @@ const App = () => {
             <Route path="/" element={<Login />} />
             <Route path="/signin" element={<Signup />} />
             {/* <Route path={`/home/${date}/${artist}`} element={<Home />} /> */}
-            <Route path={'/create'} element={<BulletinBoardPresenter />} />
+            <Route path={'/create'} element={<Create />} />
             <Route path={'/profile'} element={<Profile />} />
-            <Route path={'/create'} element={<BulletinBoardPresenter />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>

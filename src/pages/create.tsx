@@ -1,5 +1,5 @@
-import { BulletinBoardPresenter } from '../components/features/bulletinBoardCreate/bulletinBoardCreatePresenter'
+import { BulletinBoardCreateContainer } from '../components/features/bulletinBoardCreate/bulletinBoardCreateContainer'
 
 export const Create = () => {
-  return <BulletinBoardPresenter />
+  return <BulletinBoardCreateContainer />
 }
