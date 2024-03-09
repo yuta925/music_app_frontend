@@ -1,45 +1,31 @@
-import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
-import { Artists } from '../../../types'
+import { useState } from 'react'
+import { BasicSelect } from '../../../ui/select/selectbox'
+import { SelectLocation } from '../../../ui/selectlocation'
 
-type BulletinCreate = {
+export type BulletinCreate = {
   live_image: string
-  live_Date: string
-  live_venue: string
-  artist_name: string
+  live_date: Date
+  live_venue_id: number
+  artist_name_id: number
 }
 
 export const BulletinBoardCreateContainer = () => {
   const [live_image, setLiveImage] = useState('')
-  const [live_Date, setLiveDate] = useState('')
-  const [live_venues, setLiveVenues] = useState<string[]>([])
-  const [artist_names, setArtistNames] = useState<string[]>([])
+  const live_date = Date2()
+  const live_venue_id = SelectLocation()
+  const artist_id = BasicSelect()
 
   const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return
     const fileObject = e.target.files[0]
+    // オブジェクトURLを生成し、useState()を更新
     setLiveImage(window.URL.createObjectURL(fileObject))
   }
 
-  const getLiveVenues = async () => {
-    const response = await axios.get<string[]>(
-      `${import.meta.env.VITE_APP_API}/live-venue`,
-      { withCredentials: true }
-    )
-    const live_venues = response.data
-    setLiveVenues(live_venues)
-  }
-
-  const getArtistNames = async () => {
-    const response = await axios.get<Artists[]>(
-      `${import.meta.env.VITE_APP_API}/artist`,
-      { withCredentials: true }
-    )
-    const artist_names = response.data
-    setArtistNames(artist_names.map((artist) => artist.artist_name))
-  }
-
+  // selectボタンからid取得
+  // バックにartistのidとlocationのidを送る
   const createBulletin = useMutation({
     mutationFn: async (bulletin: BulletinCreate) =>
       await axios.post(
@@ -52,32 +38,21 @@ export const BulletinBoardCreateContainer = () => {
       }
     },
   })
-
   const submitHandler = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault()
-    createBulletin.mutateAsync({
+    await createBulletin.mutateAsync({
       live_image: live_image,
-      live_Date: live_Date,
-      live_venue: live_venue,
-      artist_name: artist_name,
+      live_date: live_date,
+      live_venue_id: live_venue_id,
+      artist_id: artist_id,
     })
   }
   return (
     <BulletinBoardCreatePresenter
-      live_image={live_image}
-      live_Date={live_Date}
-      live_venues={live_venues}
-      artist_names={artist_names}
-      setLiveImage={setLiveImage}
-      setLiveDate={setLiveDate}
-      setLiveVenue={setLiveVenues}
-      setArtistName={setArtistNames}
       submitHandler={submitHandler}
       onFileInputChange={onFileInputChange}
-      getArtistName={getArtistNames}
-      getLiveVenues={getLiveVenues}
     />
   )
 }
