@@ -1,49 +1,78 @@
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { InputReactHookFormTextField } from './bulletinBoardCreatePresenter'
+import { BulletinBoardCreatePresenter } from './bulletinBoardCreatePresenter'
 
-type SignIn = {
-  icon: string
-  title: string
+export type BulletinCreate = {
+  live_image: string
+  live_date: Date
+  live_venue_id: number
+  artist_id: number
 }
 
-export const CreateContainer = () => {
-  const [icon, setIcon] = useState('src/assets/images/default.png')
-  const [title, setTitle] = useState('')
-  const navigate = useNavigate()
-  const register = useMutation({
-    mutationFn: async (user: SignIn) =>
-      await axios.post(`${process.env.VITE_APP_API}/signup`, user),
-  })
+export const BulletinBoardCreateContainer = () => {
+  // stateを定義
+  const [live_image, setLiveImage] = useState('')
+  const Today = new Date()
+  const [live_date, setLiveDate] = useState(Today)
+  const [live_venue_id, setLiveVenueId] = useState(0)
+  const [artist_id, setArtistId] = useState(0)
 
+  // コンポーネント内の関数を定義
   const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return
-
-    // React.ChangeEvent<HTMLInputElement>よりファイルを取得
     const fileObject = e.target.files[0]
-    // オブジェクトURLを生成し、useState()を更新
-    setIcon(window.URL.createObjectURL(fileObject))
+    setLiveImage(window.URL.createObjectURL(fileObject))
   }
 
-  const submitAuthhandler = async (
+  const selectDate = (selectDate: Date) => {
+    setLiveDate(selectDate)
+  }
+
+  const selectVenue = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setLiveVenueId(Number(event.target.value))
+  }
+
+  const selectArtist = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setArtistId(Number(event.target.value))
+  }
+
+  // selectボタンからid取得
+  // バックにartistのidとlocationのidを送る
+  const createBulletin = useMutation({
+    mutationFn: async (bulletin: BulletinCreate) =>
+      await axios.post(
+        `${import.meta.env.VITE_APP_API}/bulletin-board`,
+        bulletin
+      ),
+    onSuccess() {
+      {
+        /* アラートを出す関数を呼び出す */
+      }
+    },
+  })
+  const submitHandler = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault()
-    await register.mutateAsync({
-      icon: icon,
-      title: title,
+    await createBulletin.mutateAsync({
+      live_image: live_image,
+      live_date: live_date,
+      live_venue_id: live_venue_id,
+      artist_id: artist_id,
     })
   }
   return (
-    <InputReactHookFormTextField
-      icon={icon}
-      title={title}
-      setTitle={setTitle}
-      navigate={() => navigate('/')}
-      submitAuthhandler={submitAuthhandler}
+    <BulletinBoardCreatePresenter
+      live_image={live_image}
+      live_date={live_date}
+      live_venue_id={live_venue_id}
+      live_artist_id={artist_id}
       onFileInputChange={onFileInputChange}
+      selectDate={selectDate}
+      selectVenue={selectVenue}
+      selectArtist={selectArtist}
+      submitHandler={submitHandler}
     />
   )
 }

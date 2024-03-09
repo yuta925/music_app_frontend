@@ -1,43 +1,7 @@
-// import * as React from 'react';
-// import Box from '@mui/material/Box';
-// import InputLabel from '@mui/material/InputLabel';
-// import MenuItem from '@mui/material/MenuItem';
-// import FormControl from '@mui/material/FormControl';
-// import Select, { SelectChangeEvent } from '@mui/material/Select';
-// import './selectbox.css'
-// import SearchIcon from '@mui/icons-material/Search';
+import { createContext, useState } from 'react'
 
-// export default function BasicSelect() {
-//   const [age, setAge] = React.useState('');
-
-//   const handleChange = (event: SelectChangeEvent) => {
-//     setAge(event.target.value as string);
-//   };
-
-//   return (
-//     <div className='selectbox'>
-//     <Box sx={{ minWidth: 120 }} style={{ marginLeft: 'auto' }}>
-//       <FormControl fullWidth>
-//         <InputLabel id="demo-simple-select-label">Age</InputLabel>
-//         <Select
-//           labelId="demo-simple-select-label"
-//           id="demo-simple-select"
-//           value={age}
-//           label="Age"
-//           onChange={handleChange}
-//         >
-//           <MenuItem value={10}>Ten</MenuItem>
-//           <MenuItem value={20}>Twenty</MenuItem>
-//           <MenuItem value={30}>Thirty</MenuItem>
-//         </Select>
-//       </FormControl>
-//     </Box>
-//     </div>
-//   );
-// }
-import React, { useState } from 'react'
-
-function BasicSelect() {
+export const BasicSelect = () => {
+  const ArtistContext = createContext({})
   const [selectedValue, setSelectedValue] = useState('')
   const options = [
     { value: '1', ArtistId: '1', Name: 'The beatls' },
@@ -58,13 +22,13 @@ function BasicSelect() {
   ]
 
   // セレクトボックスの値が変更されたときに呼ばれる関数
-  const handleChange = (event: any) => {
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     // 選択された値をステートに設定
     setSelectedValue(event.target.value)
   }
 
   return (
-    <div>
+    <ArtistContext.Provider value={{ selectedValue, setSelectedValue }}>
       <select value={selectedValue} onChange={handleChange}>
         <option value="">アーティスト</option>
         {options.map((option) => (
@@ -73,10 +37,6 @@ function BasicSelect() {
           </option>
         ))}
       </select>
-
-      {selectedValue && <p>選択されたアーティスト: {selectedValue}</p>}
-    </div>
+    </ArtistContext.Provider>
   )
 }
-
-export default BasicSelect
