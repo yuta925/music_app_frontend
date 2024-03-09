@@ -13,9 +13,7 @@ type BulletinCreate = {
 export const BulletinBoardCreateContainer = () => {
   const [live_image, setLiveImage] = useState('')
   const [live_Date, setLiveDate] = useState('')
-  const [live_venue, setLiveVenue] = useState('')
   const [live_venues, setLiveVenues] = useState<string[]>([])
-  const [artist_name, setArtistName] = useState('')
   const [artist_names, setArtistNames] = useState<string[]>([])
 
   const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,9 +68,7 @@ export const BulletinBoardCreateContainer = () => {
     <BulletinBoardCreatePresenter
       live_image={live_image}
       live_Date={live_Date}
-      live_venue={live_venue}
       live_venues={live_venues}
-      artist_name={artist_name}
       artist_names={artist_names}
       setLiveImage={setLiveImage}
       setLiveDate={setLiveDate}
