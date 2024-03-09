@@ -1,5 +1,5 @@
 import { FC } from 'react'
-
+import DatePicker from 'react-datepicker'
 import * as React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
@@ -7,24 +7,50 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import Footer from '../../../ui/footer/footer';
 import Header from '../../../ui/header/header';
 import { Button } from '@mui/material';
+import { artistOptions } from '../../../assets/Options/artistOptions';
+import { veneuOptions } from '../../../assets/Options/venueOptions'
 
-type BulletinBoardShowProps = {
-  live_date: string
-  artist_name: string
+type BulletinBoardCreateProps = {
+  live_image: string
+  live_date: Date
+  live_venue_id: number
+  live_artist_id: number
+  onFileInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  selectDate: (selectDate: Date) => void
+  selectVenue: (event: React.ChangeEvent<HTMLSelectElement>) => void
+  selectArtist: (event: React.ChangeEvent<HTMLSelectElement>) => void
+  submitHandler: (e: React.FormEvent<HTMLFormElement>) => Promise<void>
 }
 
-// export const BulletinBoardPresenter = ({
-//   //live_date,
-//   // artist_name,
-// }) => {
-//   return <div className='flex justify-center'> <ImageList sx={{ width: 500, height: 450 }}>
 
-
-
-export default function TitlebarBelowImageList() {
+export const TitlebarBelowImageList = ({
+  live_date,
+  artist_name,
+  selectDate,
+  live_artist_id,
+  selectArtist,
+  artistOptions,
+}) => {
   return (
     <div className='flex flex-col h-screen'>
       <Header />
+      <div className="text-center <div mt-8 mb-8 text-2xl flex justify-center items-center">
+          <DatePicker
+            selected={live_date}
+            onChange={selectDate}
+            dateFormat="yyyy/MM/dd"
+          />
+        </div>
+      <div className="mt-8 mb-8 text-2xl flex justify-center items-center">
+          <select value={live_artist_id} onChange={selectArtist}>
+            <option value="">アーティスト</option>
+            {artistOptions.map((option: any) => (
+              <option key={option.value} value={option.value}>
+                {option.Name}
+              </option>
+            ))}
+          </select>
+        </div>
         <ImageList >
           {itemData.map((item) => (
             <Button>
