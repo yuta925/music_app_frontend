@@ -1,11 +1,13 @@
 import { Autocomplete, TextField } from '@mui/material'
 // import { FC } from 'react'
 // import BasicDatePicker from '../../../ui/date/date'
-import { BasicSelect } from '../../../ui/select/selectbox'
+import BasicSelect from '../../../ui/select/selectbox'
 import { useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-
+import IconButton from '@mui/material/IconButton';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import SelectLocation from '../../../ui/selectlocation'
 // type BulletinBoardCreateProps = {
 //   live_image: string
 //   live_Date: string
@@ -60,13 +62,15 @@ export const BulletinBoardPresenter = () =>
             className="w-full px-2"
           />
         </div>
-        <Autocomplete
+    <div>
+        {/* <Autocomplete
           disablePortal
           id="combo-box-demo"
           options={location}
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="会場名" />}
-        />
+        /> */}
+        <SelectLocation />
         <div className="text-center">
           <DatePicker
             selected={date}
@@ -75,6 +79,10 @@ export const BulletinBoardPresenter = () =>
           />
         </div>
         <BasicSelect />
+        <IconButton>
+            <AddCircleOutlineIcon />
+        </IconButton>
+      </div>
       </div>
     )
   }
