@@ -75,7 +75,6 @@ export const SignupPresenter: FC<SignInProps> = ({
           margin="normal"
           fullWidth
           label="メールアドレス"
-          type="password"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -92,6 +91,7 @@ export const SignupPresenter: FC<SignInProps> = ({
           variant="contained"
           style={{ backgroundColor: '#BF0023' }}
           fullWidth
+          type="submit"
         >
           新規会員登録する
         </Button>

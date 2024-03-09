@@ -19,15 +19,15 @@ export const SignupContainer = () => {
   const navigate = useNavigate()
   const register = useMutation({
     mutationFn: async (user: SignIn) =>
-      await axios.post(`${process.env.VITE_APP_API}/signup`, user),
+      await axios.post(`${import.meta.env.VITE_APP_API}/users`, user),
+    onSuccess: () => {
+      navigate('/home')
+    },
   })
 
   const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return
-
-    // React.ChangeEvent<HTMLInputElement>よりファイルを取得
     const fileObject = e.target.files[0]
-    // オブジェクトURLを生成し、useState()を更新
     setIcon(window.URL.createObjectURL(fileObject))
   }
 
