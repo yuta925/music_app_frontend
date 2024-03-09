@@ -27,10 +27,7 @@ export const SignupContainer = () => {
 
   const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return
-
-    // React.ChangeEvent<HTMLInputElement>よりファイルを取得
     const fileObject = e.target.files[0]
-    // オブジェクトURLを生成し、useState()を更新
     setIcon(window.URL.createObjectURL(fileObject))
   }
 

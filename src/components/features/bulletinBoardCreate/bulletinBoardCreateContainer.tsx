@@ -15,6 +15,15 @@ export const BulletinBoardCreateContainer = () => {
   const [live_venue, setLiveVenue] = useState('')
   const [artist_name, setArtistName] = useState('')
 
+  const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return
+
+    // React.ChangeEvent<HTMLInputElement>よりファイルを取得
+    const fileObject = e.target.files[0]
+    // オブジェクトURLを生成し、useState()を更新
+    setLiveImage(window.URL.createObjectURL(fileObject))
+  }
+
   const createBulletin = useMutation({
     mutationFn: async (bulletin: BulletinCreate) =>
       await axios.post(
@@ -50,6 +59,7 @@ export const BulletinBoardCreateContainer = () => {
       setLiveVenue={setLiveVenue}
       setArtistName={setArtistName}
       submitHandler={submitHandler}
+      onFileInputChange={onFileInputChange}
     />
   )
 }
