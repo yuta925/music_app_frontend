@@ -5,18 +5,8 @@ import ImageListItem from '@mui/material/ImageListItem'
 import ImageListItemBar from '@mui/material/ImageListItemBar'
 import { Button } from "@mui/material";
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import { FC } from "react";
 
-type BulletinBoardShowProps = {
-  live_date: string
-  artist_name: string
-}
-
-
-const BulletinBoardPresenter: FC<BulletinBoardShowProps> = ({
-  live_date,
-  artist_name,
-}) => {
+const BulletinBoardPresenter = () => {
   return (
     <>
       <Header />
