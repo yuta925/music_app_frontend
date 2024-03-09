@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-// import { BulletinBoardPresenter } from '../bulletinBoardCreate/bulletinBoardPresenter'
+import { BulletinBoardPresenter } from './bulletinBoardPresenter'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 

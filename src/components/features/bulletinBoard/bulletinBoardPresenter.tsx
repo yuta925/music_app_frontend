@@ -12,7 +12,6 @@ import { BulletinBoards } from './bulletinBoardContainer'
 
 type BulletinBoardCreateProps = {
   live_date: Date
-  live_venue_id: number
   artist_id: number
   selectLiveDate: (selectDate: Date) => void
   selectArtist: (event: React.ChangeEvent<HTMLSelectElement>) => void
@@ -20,9 +19,10 @@ type BulletinBoardCreateProps = {
   enterBulletinBoard: () => void
 }
 
-export const TitlebarBelowImageList: FC<BulletinBoardCreateProps> = ({
+export const BulletinBoardPresenter: FC<BulletinBoardCreateProps> = ({
   live_date,
   artist_id,
+  live_venue_id,
   selectLiveDate,
   selectArtist,
   bulletinBoards,
