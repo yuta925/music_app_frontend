@@ -1,10 +1,8 @@
 import Header from "../../../ui/header/header";
 import Footer from "../../../ui/footer/footer";
-// import exp from "constants";
 import ImageList from '@mui/material/ImageList'
 import ImageListItem from '@mui/material/ImageListItem'
 import ImageListItemBar from '@mui/material/ImageListItemBar'
-// import { FORMERR } from "dns";
 
 const BulletinBoardPresenter = () => {
   return (
@@ -22,7 +20,7 @@ const BulletinBoardPresenter = () => {
               />
               <ImageListItemBar
                 title={item.title}
-                subtitle={<span>by: {item.author}</span>}
+                subtitle={<span>by: {item.author}</span>} // コメント数を表示させる
                 position="below"
               />
             </ImageListItem>
@@ -36,11 +34,12 @@ const BulletinBoardPresenter = () => {
 
 export default BulletinBoardPresenter
 
+// 掲示板のデータが格納されているリスト
 const itemData = [
   {
-    img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
-    title: 'Breakfast',
-    author: '@bkristastucchio',
+    img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e', // 画像
+    title: 'Breakfast', // 会場名
+    author: '@bkristastucchio', // コメント数
   },
   {
     img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
