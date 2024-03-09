@@ -15,18 +15,27 @@ export const LoginContainer = () => {
   const [password, setPassword] = useState('')
   const login = useMutation({
     mutationFn: async (user: UserLogin) =>
-      await axios.post(`${process.env.VITE_APP_API}/login`, user),
+      await axios.post(
+        `${import.meta.env.VITE_APP_API}/auth/access-token`,
+        user
+      ),
     onSuccess: () => {
       navigate('/home')
     },
   })
 
-  const submitAuthhandler = (e: React.FormEvent<HTMLFormElement>): void => {
+  const submitAuthhandler = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault()
-    login.mutate({
-      email: email,
-      password: password,
-    })
+    login
+      .mutateAsync({
+        email: email,
+        password: password,
+      })
+      .then(() => {
+        navigate('/home')
+      })
   }
   return (
     <LoginPresenter

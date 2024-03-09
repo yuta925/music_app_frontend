@@ -37,7 +37,7 @@ export const CreateContainer = () => {
     })
   }
   return (
-    < InputReactHookFormTextField 
+    <InputReactHookFormTextField
       icon={icon}
       title={title}
       setTitle={setTitle}
