@@ -1,5 +1,5 @@
 import { Box, IconButton } from '@mui/material'
-import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
+import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice'
 // import IconButton from "@mui/material/IconButton";
 
 export default function Footer2() {
@@ -25,7 +25,7 @@ export default function Footer2() {
         alignItems: 'center',
       }}
     >
-        {/* 録音機能つける */}
+      {/* 録音機能つける */}
       <IconButton
         sx={{ color: 'white', '&:hover': { color: 'secondary.main' } }}
       >

@@ -38,16 +38,12 @@ export const SignupContainer = () => {
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault()
-    await register
-      .mutateAsync({
-        icon: icon,
-        name: name,
-        email: email,
-        password: password,
-      })
-      .then(() => {
-        navigate('/home')
-      })
+    await register.mutateAsync({
+      icon: icon,
+      name: name,
+      email: email,
+      password: password,
+    })
   }
   return (
     <SignupPresenter
