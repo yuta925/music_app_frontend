@@ -28,14 +28,10 @@ export const LoginContainer = () => {
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault()
-    login
-      .mutateAsync({
-        email: email,
-        password: password,
-      })
-      .then(() => {
-        navigate('/home')
-      })
+    login.mutateAsync({
+      email: email,
+      password: password,
+    })
   }
   return (
     <LoginPresenter

@@ -1,37 +1,39 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { useState } from 'react'
+import Box from '@mui/material/Box'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl'
+import Select, { SelectChangeEvent } from '@mui/material/Select'
 import './selectbox.css'
-import SearchIcon from '@mui/icons-material/Search';
 
-export default function BasicSelect() {
-  const [age, setAge] = React.useState('');
+export const BasicSelect = () => {
+  const [artist, setArtist] = useState('')
 
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
-  };
+    setArtist(event.target.value as string)
+  }
 
   return (
-    <div className='selectbox'>
-    <Box sx={{ minWidth: 120 }} style={{ marginLeft: 'auto' }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Age"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
+    <div className="selectbox">
+      <Box
+        sx={{ maxWidth: 240, justifyItems: 'center', margin: 'auto' }}
+        style={{
+          marginLeft: 'auto',
+        }}
+      >
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">artist</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={artist}
+            label="Age"
+            onChange={handleChange}
+          >
+            {<MenuItem value={10}>Ten</MenuItem> /* {}残しておいて */}
+          </Select>
+        </FormControl>
+      </Box>
     </div>
-  );
+  )
 }
