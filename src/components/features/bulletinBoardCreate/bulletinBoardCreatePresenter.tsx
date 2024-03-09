@@ -1,8 +1,11 @@
 import { Autocomplete, TextField } from '@mui/material'
 // import { FC } from 'react'
-import BasicDatePicker from '../../../ui/date/date'
+// import BasicDatePicker from '../../../ui/date/date'
 import { BasicSelect } from '../../../ui/select/selectbox'
 import { useState } from 'react'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+
 // type BulletinBoardCreateProps = {
 //   live_image: string
 //   live_Date: string
@@ -37,12 +40,15 @@ export const BulletinBoardPresenter = () =>
   //   submitHandler,
   {
     const [icon, setIcon] = useState('')
+    const Today = new Date()
+    const [date, setDate] = useState(Today)
 
     const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!e.target.files) return
       const fileObject = e.target.files[0]
       setIcon(window.URL.createObjectURL(fileObject))
     }
+
     return (
       <div>
         <div className="flex flex-col justify-center items-center">
@@ -61,7 +67,13 @@ export const BulletinBoardPresenter = () =>
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="会場名" />}
         />
-        <BasicDatePicker />
+        <div className="text-center">
+          <DatePicker
+            selected={date}
+            onChange={(selectedDate) => setDate(selectedDate || Today)}
+            dateFormat="yyyy/MM/dd"
+          />
+        </div>
         <BasicSelect />
       </div>
     )
