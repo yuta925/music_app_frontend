@@ -30,11 +30,12 @@ export const BulletinBoardCreatePresenter: FC<BulletinBoardCreateProps> = ({
   submitHandler,
 }) => {
   return (
+    <div className="bg-slate-800">
     <form onSubmit={submitHandler}>
-      <div className='flex flex-col justify-center items-center mt-10'>
+      <div className='flex flex-col justify-center items-center mt-40'>
       
         <div className="flex flex-col justify-center items-center">
-          <img src={live_image} className="h-32 w-32" />
+          <img src={live_image} className="h-40 w-40 rounded-lg " />
           <input
             type="file"
             accept="image/*"
@@ -42,7 +43,7 @@ export const BulletinBoardCreatePresenter: FC<BulletinBoardCreateProps> = ({
             className="w-full px-2"
           />
         </div>
-        <div className="text-center <div mt-8 mb-8 text-2xl flex justify-center items-center">
+        <div className="text-center <div mt-8 mb-8 text-2xl flex justify-center items-center mt-20">
           <DatePicker
             selected={live_date}
             onChange={selectDate}
@@ -51,7 +52,7 @@ export const BulletinBoardCreatePresenter: FC<BulletinBoardCreateProps> = ({
         </div>
         <div className="mt-8 mb-8 text-2xl flex justify-center items-center">
           <select value={live_venue_id} onChange={selectVenue}>
-            <option value="">会場</option>
+            <option className=' text-center' value="">会場</option>
             {veneuOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.Name}
@@ -61,7 +62,7 @@ export const BulletinBoardCreatePresenter: FC<BulletinBoardCreateProps> = ({
         </div>
         <div className="mt-8 mb-8 text-2xl flex justify-center items-center">
           <select value={live_artist_id} onChange={selectArtist}>
-            <option value="">アーティスト</option>
+            <option className=' text-center' value="">アーティスト</option>
             {artistOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.Name}
@@ -69,10 +70,13 @@ export const BulletinBoardCreatePresenter: FC<BulletinBoardCreateProps> = ({
             ))}
           </select>
         </div>
+        <div>
         <IconButton type="submit">
-          <AddCircleOutlineIcon />
+          <AddCircleOutlineIcon  sx={{ fontSize: 70 ,color:'white'}}/>
         </IconButton>
+        </div>
       </div>
     </form>
+    </div>
   )
 }
