@@ -53,28 +53,13 @@ export const SignupPresenter: FC<SignInProps> = ({
         >
           新規会員登録
         </Typography>
-        <div className="flex flex-col">
-          {/* <Button
-            variant="contained"
-            color="primary"
-            style={{
-              borderRadius: '50%', // 正円にするためのborderRadiusを追加
-              width: '150px', // 幅と高さを同じ値に設定します（適切なサイズを選択してください）
-              height: '150px', // 幅と高さを同じ値に設定します（適切なサイズを選択してください）
-              backgroundColor: '#BF0023', // このボタンの色を#BF0023に設定
-            }}
-          >
-            画像を選択
-          </Button> */}
-          <img
-            src={icon}
-            className="justify justify-center h-32 w-32 round rounded-full"
-          />
+        <div className="flex flex-col justify-center items-center">
+          <img src={icon} className="h-32 w-32 round rounded-full" />
           <input
             type="file"
             accept="image/*"
             onChange={onFileInputChange}
-            className="pl-4"
+            className="w-full px-2"
           />
         </div>
         <TextField

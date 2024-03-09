@@ -12,7 +12,7 @@ type SignIn = {
 }
 
 export const SignupContainer = () => {
-  const [icon, setIcon] = useState('')
+  const [icon, setIcon] = useState('src/assets/images/default.png')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -51,7 +51,7 @@ export const SignupContainer = () => {
       setName={setName}
       setEmail={setEmail}
       setPassword={setPassword}
-      navigate={() => navigate('/login')}
+      navigate={() => navigate('/')}
       submitAuthhandler={submitAuthhandler}
       onFileInputChange={onFileInputChange}
     />
