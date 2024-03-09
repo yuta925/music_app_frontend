@@ -1,19 +1,22 @@
-import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { InputReactHookFormTextField } from './bulletinBoardCreatePresenter'
 
-type BulletinCreate = {
-  live_image: string
-  live_Date: string
-  live_venue: string
-  artist_name: string
+type SignIn = {
+  icon: string
+  title: string
 }
 
-export const BulletinBoardCreateContainer = () => {
-  const [live_image, setLiveImage] = useState('')
-  const [live_Date, setLiveDate] = useState('')
-  const [live_venue, setLiveVenue] = useState('')
-  const [artist_name, setArtistName] = useState('')
+export const CreateContainer = () => {
+  const [icon, setIcon] = useState('src/assets/images/default.png')
+  const [title, setTitle] = useState('')
+  const navigate = useNavigate()
+  const register = useMutation({
+    mutationFn: async (user: SignIn) =>
+      await axios.post(`${process.env.VITE_APP_API}/signup`, user),
+  })
 
   const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return
@@ -21,44 +24,25 @@ export const BulletinBoardCreateContainer = () => {
     // React.ChangeEvent<HTMLInputElement>よりファイルを取得
     const fileObject = e.target.files[0]
     // オブジェクトURLを生成し、useState()を更新
-    setLiveImage(window.URL.createObjectURL(fileObject))
+    setIcon(window.URL.createObjectURL(fileObject))
   }
 
-  const createBulletin = useMutation({
-    mutationFn: async (bulletin: BulletinCreate) =>
-      await axios.post(
-        `${import.meta.env.VITE_APP_API}/bulletin-board`,
-        bulletin
-      ),
-    onSuccess() {
-      {
-        /* アラートを出す関数を呼び出す */
-      }
-    },
-  })
-
-  const submitHandler = async (
+  const submitAuthhandler = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault()
-    createBulletin.mutateAsync({
-      live_image: live_image,
-      live_Date: live_Date,
-      live_venue: live_venue,
-      artist_name: 'artist_name',
+    await register.mutateAsync({
+      icon: icon,
+      title: title,
     })
   }
   return (
-    <BulletinBoardCreatePresenter
-      live_image={live_image}
-      live_Date={live_Date}
-      live_venue={live_venue}
-      artist_name={artist_name}
-      setLiveImage={setLiveImage}
-      setLiveDate={setLiveDate}
-      setLiveVenue={setLiveVenue}
-      setArtistName={setArtistName}
-      submitHandler={submitHandler}
+    <InputReactHookFormTextField
+      icon={icon}
+      title={title}
+      setTitle={setTitle}
+      navigate={() => navigate('/')}
+      submitAuthhandler={submitAuthhandler}
       onFileInputChange={onFileInputChange}
     />
   )
