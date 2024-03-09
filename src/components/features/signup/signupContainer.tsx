@@ -19,7 +19,10 @@ export const SignupContainer = () => {
   const navigate = useNavigate()
   const register = useMutation({
     mutationFn: async (user: SignIn) =>
-      await axios.post(`${process.env.VITE_APP_API}/signup`, user),
+      await axios.post(`${import.meta.env.VITE_APP_API}/users`, user),
+    onSuccess: () => {
+      navigate('/home')
+    },
   })
 
   const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,12 +38,16 @@ export const SignupContainer = () => {
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault()
-    await register.mutateAsync({
-      icon: icon,
-      name: name,
-      email: email,
-      password: password,
-    })
+    await register
+      .mutateAsync({
+        icon: icon,
+        name: name,
+        email: email,
+        password: password,
+      })
+      .then(() => {
+        navigate('/home')
+      })
   }
   return (
     <SignupPresenter
