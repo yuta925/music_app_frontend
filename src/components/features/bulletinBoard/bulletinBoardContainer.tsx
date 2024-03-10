@@ -3,9 +3,9 @@ import { BulletinBoardPresenter } from './bulletinBoardPresenter'
 import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
 import { ModalContext } from '../../../ui/modal/modal'
-import { ArtistContext } from '../../../ui/Select/aristSelect'
-import { LocationContext } from '../../../ui/Select/locationSelect'
-import { DateContext } from '../../../ui/Select/dateSelect'
+import { ArtistContext } from '../../../ui/select/aristSelect'
+import { LocationContext } from '../../../ui/select/locationSelect'
+import { DateContext } from '../../../ui/select/dateSelect'
 
 export type BulletinBoards = {
   live_image: string

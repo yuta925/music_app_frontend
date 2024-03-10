@@ -2,9 +2,9 @@ import { FC } from 'react'
 import Modal from 'react-modal'
 import { Button } from '@mui/material'
 import { useState, createContext } from 'react'
-import { LocationSelectBox } from '../Select/locationSelect'
-import { Dateselect } from '../Select/dateSelect'
-import { AristSelecBox } from '../Select/aristSelect'
+import { LocationSelectBox } from '../select/locationSelect'
+import { Dateselect } from '../select/dateSelect'
+import { AristSelecBox } from '../select/aristSelect'
 
 export type NestedModalProps = {
   submitHandler: () => Promise<void>
