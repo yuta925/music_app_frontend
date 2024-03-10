@@ -14,12 +14,13 @@ import Footer from '../footer/footer'
 
 const Widget = styled('div')(({ theme }) => ({
   padding: 16,
-  borderRadius: 16,
+  borderRadius: 40,
   width: 343,
   maxWidth: '100%',
   margin: 'auto',
+  marginBottom:10,
   backgroundColor:
-    theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.4)',
+    theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.7)',
   backdropFilter: 'blur(40px)',
 }))
 
@@ -58,8 +59,8 @@ export default function MusicPlayerSlider() {
     // <div className="flex flex-col h-screen ">
     //   <Header />
     //   <div className="flex-grow">
-    //     <Box>
-          <Widget>
+
+          <Widget className="bg-slate-00">
             <Box sx={{ display: 'flex-center', alignItems: 'center' }}>
 
               {/* アイコンのデータほしい */}
@@ -201,6 +202,7 @@ export default function MusicPlayerSlider() {
               alignItems="center"
             ></Stack>
           </Widget>
+          // </Box>
       //   {/* </Box>
       // </div>
       // <div className="flex-grow">

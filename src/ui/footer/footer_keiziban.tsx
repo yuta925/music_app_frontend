@@ -7,8 +7,9 @@ export default function Footer2() {
     <Box
       sx={{
         //   '& button':{m: 1},
+        backgroundColor: '#333333',
         borderTop: '2px solid white',
-        position:'fixed',
+        position: 'fixed',
         bottom: 0,
         left: 0,
         padding: 0,
@@ -16,18 +17,18 @@ export default function Footer2() {
         width: '100%',
         height: 110,
         borderRadius: 0,
-        bgcolor: 'primary.main',
-        '&:hover': {
-          bgcolor: 'primary.dark',
-        },
+        bgcolor: '#333333',
+        // '&:hover': {
+        //   bgcolor: 'primary.dark',
+        // },
         justifyContent: 'space-around',
         alignItems: 'center',
-        textAlign:'center'
+        textAlign: 'center',
       }}
     >
       {/* 録音機能つける */}
       <IconButton
-        sx={{ color: 'white', '&:hover': { color: 'secondary.main' }, }}
+        sx={{ color: 'white', '&:hover': { color: 'secondary.main' } }}
       >
         <KeyboardVoiceIcon sx={{ fontSize: 70 }} />
       </IconButton>

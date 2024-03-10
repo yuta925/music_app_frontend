@@ -8,6 +8,7 @@ export default function Header2() {
           zIndex={1100}
           sx={{
           //   '& button':{m: 1},
+            color:'#333333',
             borderButtom:'2px solid white',
             position:'fixed',
             top: 0,
@@ -17,10 +18,11 @@ export default function Header2() {
             width:'100%',
             height: 90,
             borderRadius: 0,
-            bgcolor: 'primary.main',
-            '&:hover': {
-              bgcolor: 'primary.dark',
-            },
+            bgcolor: '#333333',
+            // bgcolor: 'primary.main',
+            // '&:hover': {
+            //   bgcolor: 'primary.dark',
+            // },
             display: 'flex',
             justifyContent: 'space-around',
             alignItems: 'center',

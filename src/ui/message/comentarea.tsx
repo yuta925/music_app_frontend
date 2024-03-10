@@ -10,8 +10,9 @@ import { Box } from '@mui/system'
 export default function Comentarea(){
   return(
   <React.StrictMode>
+    <Box sx={{}}></Box>
     <Header2 />
-    <Box width={'100%'} sx={{my:12}}>
+    <Box width={'100%'} sx={{my:12,backgroundColor:'black'}}>
       <MusicPlayerSlider />
       <MusicPlayerSlider />
       <MusicPlayerSlider />
