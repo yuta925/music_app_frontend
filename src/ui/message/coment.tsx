@@ -61,15 +61,22 @@ export default function MusicPlayerSlider() {
     //     <Box>
           <Widget>
             <Box sx={{ display: 'flex-center', alignItems: 'center' }}>
+
+              {/* アイコンのデータほしい */}
               <CoverImage>
                 <img alt="" src="/static/images/sliders/chilling-sunday.jpg" />
               </CoverImage>
+
               <Box
                 sx={{ ml: 1.5, minWidth: 0, marginLeft: 0.5, marginRight: 2 }}
               >
+
+                {/* ユーザー名ほしい */}
                 <Typography noWrap sx={{ fontSize: 20 }}>
                   名前ごうえんじ
                 </Typography>
+
+                {/* 投稿した日付と時間 */}
                 <Typography
                   noWrap
                   letterSpacing={-0.25}
@@ -77,8 +84,12 @@ export default function MusicPlayerSlider() {
                 >
                   {CurrentDate()}
                 </Typography>
+
               </Box>
+
+              {/* もしいいねの数数えるならココ */}
               <FireButton />
+
             </Box>
             <Box
               sx={{
@@ -92,6 +103,8 @@ export default function MusicPlayerSlider() {
                 borderRadius: 30,
               }}
             >
+
+              {/* 再生と停止ボタン */}
               <IconButton
                 sx={{ marginLeft: 1, marginRight: 0 }}
                 aria-label={paused ? 'play' : 'pause'}
@@ -109,6 +122,8 @@ export default function MusicPlayerSlider() {
                   />
                 )}
               </IconButton>
+
+
               <Box
                 sx={{
                   display: 'flex',
@@ -117,13 +132,20 @@ export default function MusicPlayerSlider() {
                   mt: -2,
                 }}
               >
+
+                {/* 再生した秒数 */}
                 <TinyText sx={{ marginTop: 2, fontSize: 16 }}>
                   {formatDuration(position)}
                 </TinyText>
+
+                {/* 残りの秒数 */}
                 <TinyText sx={{ marginTop: 2, fontSize: 16 }}>
                   /{formatDuration(duration - position)}
                 </TinyText>
+
               </Box>
+              
+              {/* 音声再生バー （秒数とバーは連動してる）*/}
               <Slider
                 aria-label="time-indicator"
                 size="small"
@@ -138,7 +160,6 @@ export default function MusicPlayerSlider() {
                   height: 12,
                   width: '35%',
                   marginLeft: 3,
-                  // ここでバーの長さを変える
                   '& .MuiSlider-thumb': {
                     width: 20,
                     height: 20,
