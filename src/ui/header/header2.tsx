@@ -1,8 +1,7 @@
 import { Box, Typography } from '@mui/material'
-import { NestedModal, type NestedModalProps } from '../modal/modal'
 import { FC } from 'react'
 
-export const Header: FC<NestedModalProps> = ({ submitHandler }) => {
+export const Header2: FC = () => {
   return (
     <div>
       <Box
@@ -26,7 +25,6 @@ export const Header: FC<NestedModalProps> = ({ submitHandler }) => {
         <Typography variant="h5" sx={{ color: 'white', padding: 2 }}>
           ファイアートルネード
         </Typography>
-        <NestedModal submitHandler={submitHandler} />
         <div style={{ marginLeft: 'auto' }}>
           {/* <IconButton sx={{ color: 'white', '&:hover': { color: 'secondary.main' } }} >
             <LogoutIcon sx={{ fontSize: 50 }} />

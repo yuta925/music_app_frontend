@@ -19,6 +19,9 @@ export const LoginContainer = () => {
         `${import.meta.env.VITE_APP_API}/auth/access-token`,
         user
       ),
+    onSuccess() {
+      navigate(`/home`)
+    },
   })
 
   const submitAuthhandler = async (

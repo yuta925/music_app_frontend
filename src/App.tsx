@@ -5,9 +5,10 @@ import { CsrfToken } from './types'
 import Login from './pages/login'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Signup from './pages/signup'
-import { Home } from './pages/home'
+// import { Home } from './pages/home'
 import { Profile } from './pages/profile'
 import { Create } from './pages/create'
+import Home from './pages/home'
 const App = () => {
   const queryClient = new QueryClient()
 

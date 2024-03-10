@@ -1,5 +1,5 @@
 import { Button, TextField, Typography } from '@mui/material'
-import { Box, maxHeight, maxWidth, styled, width } from '@mui/system'
+import { styled } from '@mui/system'
 import { type FC } from 'react'
 
 type LoginProps = {
@@ -43,7 +43,7 @@ const LoginPresenter: FC<LoginProps> = ({
 }) => {
   return (
     <form onSubmit={submitAuthhandler}>
-      <LoginCard >
+      <LoginCard>
         <Typography variant="h5" gutterBottom style={{ textAlign: 'center' }}>
           ログイン
         </Typography>
@@ -64,16 +64,25 @@ const LoginPresenter: FC<LoginProps> = ({
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />
-        <Button variant="contained" style={{ backgroundColor: "#BF0023" }} fullWidth type="submit">
+        <Button
+          variant="contained"
+          style={{ backgroundColor: '#BF0023' }}
+          fullWidth
+          type="submit"
+        >
           ログイン
         </Button>
         <div style={{ textAlign: 'right', width: '100%' }}>
-          <RightAlignedButton variant="text" style={{ justifyContent: 'flex-start', color: '#BF0023' }} onClick={navigate}>
+          <RightAlignedButton
+            variant="text"
+            style={{ justifyContent: 'flex-start', color: '#BF0023' }}
+            onClick={navigate}
+          >
             新規登録画面へ
           </RightAlignedButton>
         </div>
       </LoginCard>
-    </form >
+    </form>
   )
 }
 
