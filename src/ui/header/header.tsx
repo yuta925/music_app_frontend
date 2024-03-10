@@ -7,7 +7,7 @@ export default function Header() {
       <Box
         sx={{
           position: 'fixed',
-          borderButtom: '2px solid white',
+          borderBottom: '2px solid white',
           top: 0,
           left: 0,
           padding: 0,
@@ -15,10 +15,7 @@ export default function Header() {
           width: '100%',
           height: 68,
           borderRadius: 0,
-          bgcolor: 'primary.main',
-          '&:hover': {
-            bgcolor: 'primary.dark',
-          },
+          bgcolor: '#333333',
           display: 'flex',
           justifyContent: 'space-around',
           alignItems: 'center',
@@ -27,9 +24,9 @@ export default function Header() {
         {/* ここはへんこうする！！！ */}
         <Typography variant="h5" sx={{ color: 'white', padding: 2 }}>ファイアートルネード</Typography>
         <div style={{ marginLeft: 'auto' }}>
-          <IconButton sx={{ color: 'white', '&:hover': { color: 'secondary.main' } }} >
+          {/* <IconButton sx={{ color: 'white', '&:hover': { color: 'secondary.main' } }} >
             <LogoutIcon sx={{ fontSize: 50 }} />
-          </IconButton>
+          </IconButton> */}
         </div>
       </Box>
     </div>
