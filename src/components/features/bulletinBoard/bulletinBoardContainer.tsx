@@ -10,6 +10,7 @@ import { DateContext } from '../../../ui/Select/dateSelect'
 export type BulletinBoards = {
   live_image: string
   live_venue_id: number
+  bulletin_id: number
 }
 
 type getBulletins = {

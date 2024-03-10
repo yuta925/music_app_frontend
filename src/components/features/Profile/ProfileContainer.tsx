@@ -3,13 +3,13 @@ import { ProfilePresenter } from './ProfilePresenter'
 import { useState, useEffect } from 'react'
 
 type UserProfile = {
-  user_icon: string
-  user_name: string
+  userIcon: string
+  name: string
 }
 
 export const ProfileContainer = () => {
-  const [user_icon, setUserIcon] = useState('src/assets/images/default.png')
-  const [user_name, setUserName] = useState('yuta')
+  const [userIcon, setUserIcon] = useState('src/assets/images/default.png')
+  const [name, setName] = useState('yuta')
   useEffect(() => {
     const getProufile = async () => {
       const response = await axios.get<UserProfile>(
@@ -20,12 +20,12 @@ export const ProfileContainer = () => {
 
     const fetchProfile = async () => {
       const userInfo = await getProufile()
-      setUserIcon(userInfo.user_icon)
-      setUserName(userInfo.user_name)
+      setUserIcon(userInfo.userIcon)
+      setName(userInfo.name)
     }
 
     fetchProfile()
   }, [])
 
-  return <ProfilePresenter user_icon={user_icon} user_name={user_name} />
+  return <ProfilePresenter user_icon={userIcon} user_name={name} />
 }

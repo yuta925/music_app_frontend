@@ -1,47 +1,28 @@
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
-import { useState } from 'react'
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BulletinBoardCreatePresenter } from './bulletinBoardCreatePresenter'
+import { DateContext } from '../../../ui/Select/dateSelect'
+import { ArtistContext } from '../../../ui/Select/aristSelect'
+import { LocationContext } from '../../../ui/Select/locationSelect'
+import { ImgUpContext } from '../../../ui/imgUp/imgUp'
 
 export type BulletinCreate = {
   live_image: string
   live_date: Date
-  live_venue_id: number
-  artist_id: number
+  locationid: number
+  artistid: number
 }
 
 export const BulletinBoardCreateContainer = () => {
-  // stateを定義
-  const [live_image, setLiveImage] = useState('')
-  const Today = new Date()
-  const [live_date, setLiveDate] = useState(Today)
-  const [live_venue_id, setLiveVenueId] = useState(0)
-  const [artist_id, setArtistId] = useState(0)
-
   const navigate = useNavigate()
 
-  // コンポーネント内の関数を定義
-  const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return
-    const fileObject = e.target.files[0]
-    setLiveImage(window.URL.createObjectURL(fileObject))
-  }
+  const { live_image, setLiveImage } = useContext(ImgUpContext)
+  const { live_date, setLiveDate } = useContext(DateContext)
+  const { artistid, selectArtistId } = useContext(ArtistContext)
+  const { locationid, selectLocationId } = useContext(LocationContext)
 
-  const selectDate = (selectDate: Date) => {
-    setLiveDate(selectDate)
-  }
-
-  const selectVenue = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setLiveVenueId(Number(event.target.value))
-  }
-
-  const selectArtist = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setArtistId(Number(event.target.value))
-  }
-
-  // selectボタンからid取得
-  // バックにartistのidとlocationのidを送る
   const createBulletin = useMutation({
     mutationFn: async (bulletin: BulletinCreate) =>
       await axios.post(
@@ -54,6 +35,7 @@ export const BulletinBoardCreateContainer = () => {
       }
     },
   })
+
   const submitHandler = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
@@ -61,21 +43,20 @@ export const BulletinBoardCreateContainer = () => {
     await createBulletin.mutateAsync({
       live_image: live_image,
       live_date: live_date,
-      live_venue_id: live_venue_id,
-      artist_id: artist_id,
+      locationid: locationid,
+      artistid: artistid,
     })
   }
+
   return (
-    <BulletinBoardCreatePresenter
-      live_image={live_image}
-      live_date={live_date}
-      live_venue_id={live_venue_id}
-      live_artist_id={artist_id}
-      onFileInputChange={onFileInputChange}
-      selectDate={selectDate}
-      selectVenue={selectVenue}
-      selectArtist={selectArtist}
-      submitHandler={submitHandler}
-    />
+    <ImgUpContext.Provider value={{ live_image, setLiveImage }}>
+      <DateContext.Provider value={{ live_date, setLiveDate }}>
+        <LocationContext.Provider value={{ locationid, selectLocationId }}>
+          <ArtistContext.Provider value={{ artistid, selectArtistId }}>
+            <BulletinBoardCreatePresenter submitHandler={submitHandler} />
+          </ArtistContext.Provider>
+        </LocationContext.Provider>
+      </DateContext.Provider>
+    </ImgUpContext.Provider>
   )
 }
