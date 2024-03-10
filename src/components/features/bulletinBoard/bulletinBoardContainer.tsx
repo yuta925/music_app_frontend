@@ -17,9 +17,10 @@ type getBulletins = {
 }
 
 export const BulletinBoardContainer = () => {
-  const [live_date, setLiveDate] = useState<Date>(new Date())
+  const date = new Date()
   const [artistid, setArtistId] = useState<number>(0)
   const [locationid, setLocationId] = useState<number>(0)
+  const [live_date, setLiveDate] = useState<Date>(new Date(date.toISOString()))
   const [bulletinBoards, setBulletinBoards] = useState<BulletinBoards[]>([])
 
   const useGetBulletins = useMutation({

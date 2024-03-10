@@ -8,7 +8,6 @@ import Signup from './pages/signup'
 import { Home } from './pages/home'
 import { Profile } from './pages/profile'
 import { Create } from './pages/create'
-import { Home } from './pages/home'
 const App = () => {
   const queryClient = new QueryClient()
 
