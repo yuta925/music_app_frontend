@@ -1,7 +1,11 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { BulletinBoardPresenter } from './bulletinBoardPresenter'
 import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
+import { ModalContext } from '../../../ui/modal/modal'
+import { ArtistContext } from '../../../ui/Select/aristSelect'
+import { LocationContext } from '../../../ui/Select/locationSelect'
+import { DateContext } from '../../../ui/Select/dateSelect'
 
 export type BulletinBoards = {
   live_image: string
@@ -17,10 +21,10 @@ type getBulletins = {
 }
 
 export const BulletinBoardContainer = () => {
-  const date = new Date()
-  const [artistid, setArtistId] = useState<number>(0)
-  const [locationid, setLocationId] = useState<number>(0)
-  const [live_date, setLiveDate] = useState<Date>(new Date(date.toISOString()))
+  const { editModalIsOpen, setEditModalIsOpen } = useContext(ModalContext)
+  const { live_date, setLiveDate } = useContext(DateContext)
+  const { artistid, selectArtistId } = useContext(ArtistContext)
+  const { locationid, selectLocationId } = useContext(LocationContext)
   const [bulletinBoards, setBulletinBoards] = useState<BulletinBoards[]>([])
 
   const useGetBulletins = useMutation({
@@ -40,32 +44,23 @@ export const BulletinBoardContainer = () => {
       live_date: live_date,
       artistid: artistid,
       locationid: locationid,
-      skip: 20,
+      skip: 0,
       limit: 10,
     })
   }
 
-  const selectLiveDate = (selectDate: Date) => {
-    setLiveDate(selectDate)
-  }
-  const selectArtist = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setArtistId(Number(event.target.value))
-  }
-
-  const selectLocation = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setLocationId(Number(event.target.value))
-  }
-
   return (
-    <BulletinBoardPresenter
-      live_date={live_date || new Date()} // Provide a default value for live_date
-      artistid={artistid}
-      locationid={locationid}
-      selectLiveDate={selectLiveDate}
-      selectArtist={selectArtist}
-      selectLocation={selectLocation}
-      bulletinBoards={bulletinBoards}
-      enterBulletinBoard={fetchBulletins}
-    />
+    <ModalContext.Provider value={{ editModalIsOpen, setEditModalIsOpen }}>
+      <DateContext.Provider value={{ live_date, setLiveDate }}>
+        <LocationContext.Provider value={{ locationid, selectLocationId }}>
+          <ArtistContext.Provider value={{ artistid, selectArtistId }}>
+            <BulletinBoardPresenter
+              enterBulletinBoard={fetchBulletins}
+              bulletinBoards={bulletinBoards}
+            />
+          </ArtistContext.Provider>
+        </LocationContext.Provider>
+      </DateContext.Provider>
+    </ModalContext.Provider>
   )
 }

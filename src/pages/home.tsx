@@ -1,5 +1,7 @@
 import { BulletinBoardContainer } from '../components/features/bulletinBoard/bulletinBoardContainer'
 
-export const Home = () => {
+const Home = () => {
   return <BulletinBoardContainer />
 }
+
+export default Home

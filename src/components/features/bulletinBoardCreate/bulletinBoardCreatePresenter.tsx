@@ -45,8 +45,9 @@ export const BulletinBoardCreatePresenter: FC<BulletinBoardCreateProps> = ({
               className="w-full px-2"
             />
           </div>
-          <div className="text-center <div mt-8 mb-8 text-2xl flex justify-center items-center mt-20">
+          <div className="text-center <div mb-8 text-2xl flex justify-center items-center mt-20">
             <DatePicker
+              locale="ja"
               selected={live_date}
               onChange={selectDate}
               dateFormat="yyyy/MM/dd"
