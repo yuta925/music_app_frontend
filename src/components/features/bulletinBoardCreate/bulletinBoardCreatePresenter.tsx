@@ -15,7 +15,7 @@ type BulletinBoardCreateProps = {
   selectDate: (selectDate: Date) => void
   selectVenue: (event: React.ChangeEvent<HTMLSelectElement>) => void
   selectArtist: (event: React.ChangeEvent<HTMLSelectElement>) => void
-  submitHandler: () => Promise<void>
+  submitHandler: (e: React.FormEvent<HTMLFormElement>) => Promise<void>
 }
 
 export const BulletinBoardCreatePresenter: FC<BulletinBoardCreateProps> = ({
