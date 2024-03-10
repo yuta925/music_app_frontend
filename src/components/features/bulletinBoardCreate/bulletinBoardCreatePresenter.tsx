@@ -5,6 +5,8 @@ import { veneuOptions } from '../../../assets/Options/venueOptions'
 import { artistOptions } from '../../../assets/Options/artistOptions'
 import IconButton from '@mui/material/IconButton'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
+import Header from '../../../ui/header/header'
+import Footer from '../../../ui/footer/footer'
 
 type BulletinBoardCreateProps = {
   live_image: string
@@ -30,9 +32,10 @@ export const BulletinBoardCreatePresenter: FC<BulletinBoardCreateProps> = ({
   submitHandler,
 }) => {
   return (
-    <div className="bg-slate-800">
+    <div className='z-10'>
+      <Header />
       <form onSubmit={submitHandler}>
-        <div className="flex flex-col justify-center items-center mt-40">
+         <div className="flex flex-col justify-center items-center mt-40">
           <div className="flex flex-col justify-center items-center">
             <img src={live_image} className="h-40 w-40 rounded-lg " />
             <input
@@ -78,8 +81,11 @@ export const BulletinBoardCreatePresenter: FC<BulletinBoardCreateProps> = ({
               <AddCircleOutlineIcon sx={{ fontSize: 70, color: 'white' }} />
             </IconButton>
           </div>
-        </div>
+         </div>
       </form>
+      <Footer />
+
     </div>
+   
   )
 }
