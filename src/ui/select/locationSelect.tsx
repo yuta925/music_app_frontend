@@ -15,13 +15,19 @@ export const LocationSelectBox = () => {
   const [locationid, selectLocationId] = useState<number>(0)
 
   const selectLocation = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    selectLocationId(Number(event.target.value))
+    const selectedLocationId = Number(event.target.value)
+    selectLocationId(selectedLocationId)
+    console.log(selectedLocationId)
   }
 
   return (
     <LocationContext.Provider value={{ locationid, selectLocationId }}>
-      <div className="mt-8 mb-8 text-2xl flex justify-center items-center">
-        <select value={locationid} onChange={selectLocation}>
+      <div className="mt-4 mb-4 text-2xl flex justify-center items-center">
+        <select
+          value={locationid}
+          onChange={selectLocation}
+          className="w-[200px] h-[50px] round rounded-lg"
+        >
           <option value="">会場</option>
           {veneuOptions.map((option) => (
             <option key={option.value} value={option.value}>

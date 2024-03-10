@@ -4,7 +4,7 @@ import { Button } from '@mui/material'
 import { useState, createContext } from 'react'
 import { LocationSelectBox } from '../Select/locationSelect'
 import { Dateselect } from '../Select/dateSelect'
-import { AristSelecBox } from '../Select/aristSelect'
+import { AristSelecBox } from '../Select/artistSelect'
 
 export type NestedModalProps = {
   submitHandler: () => Promise<void>
@@ -24,7 +24,7 @@ export const NestedModal: FC<NestedModalProps> = ({ submitHandler }) => {
   const [editModalIsOpen, setEditModalIsOpen] = useState(false)
 
   return (
-    <div className="grid justify-items-end m-4 ">
+    <div className="flex flex-auto mt-2 z-30">
       <Button
         variant="contained"
         color="primary"
@@ -36,17 +36,21 @@ export const NestedModal: FC<NestedModalProps> = ({ submitHandler }) => {
         <span className="text-xs">検索</span>
       </Button>
 
-      <Modal isOpen={editModalIsOpen}>
+      <Modal isOpen={editModalIsOpen} ariaHideApp={false} className="mt-20">
         <Button onClick={() => setEditModalIsOpen(false)}>閉じる</Button>
-
-        <LocationSelectBox />
         <Dateselect />
-
+        <LocationSelectBox />
         <AristSelecBox />
-
-        <Button variant="contained" color="primary" onClick={submitHandler}>
-          この条件で検索する
-        </Button>
+        <div className="flex justify-center my-8">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={submitHandler}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold my-8 px-4 rounded"
+          >
+            この条件で検索する
+          </Button>
+        </div>
       </Modal>
     </div>
   )

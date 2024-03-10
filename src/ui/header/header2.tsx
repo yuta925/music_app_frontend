@@ -3,7 +3,7 @@ import { FC } from 'react'
 
 export const Header2: FC = () => {
   return (
-    <div>
+    <div className="fixed">
       <Box
         sx={{
           position: 'fixed',

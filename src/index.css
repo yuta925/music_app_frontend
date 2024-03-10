@@ -3,9 +3,8 @@
 @tailwind utilities;
 
 body {
-    background-color: #333333; /* ここに背景色を設定します */
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    /* 他の body 要素のスタイル設定を追加することもできます */
+  background-color: #333333;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
 }

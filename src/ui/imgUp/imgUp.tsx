@@ -21,8 +21,8 @@ export const ImgUp = () => {
 
   return (
     <ImgUpContext.Provider value={{ live_image, setLiveImage }}>
-      <div className="flex flex-col justify-center items-center">
-        <img src={live_image} className="h-40 w-40 rounded-lg " />
+      <div className="flex flex-col justify-center items-center gap-y-2">
+        <img src={live_image} className="h-40 w-40 rounded-lg" />
         <input
           type="file"
           accept="image/*"

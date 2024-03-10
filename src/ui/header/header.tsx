@@ -4,7 +4,7 @@ import { FC } from 'react'
 
 export const Header: FC<NestedModalProps> = ({ submitHandler }) => {
   return (
-    <div>
+    <div className="z-10 bg-slate-900">
       <Box
         sx={{
           position: 'fixed',
@@ -23,7 +23,7 @@ export const Header: FC<NestedModalProps> = ({ submitHandler }) => {
         }}
       >
         {/* ここはへんこうする！！！ */}
-        <Typography variant="h5" sx={{ color: 'white', padding: 2 }}>
+        <Typography variant="h5" sx={{ color: 'white', padding: 3 }}>
           ファイアートルネード
         </Typography>
         <NestedModal submitHandler={submitHandler} />

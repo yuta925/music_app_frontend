@@ -4,13 +4,13 @@ import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BulletinBoardCreatePresenter } from './bulletinBoardCreatePresenter'
 import { DateContext } from '../../../ui/Select/dateSelect'
-import { ArtistContext } from '../../../ui/Select/aristSelect'
+import { ArtistContext } from '../../../ui/Select/artistSelect'
 import { LocationContext } from '../../../ui/Select/locationSelect'
 import { ImgUpContext } from '../../../ui/imgUp/imgUp'
 
 export type BulletinCreate = {
   live_image: string
-  live_date: Date
+  live_date: string
   locationid: number
   artistid: number
 }
@@ -19,7 +19,8 @@ export const BulletinBoardCreateContainer = () => {
   const navigate = useNavigate()
 
   const { live_image, setLiveImage } = useContext(ImgUpContext)
-  const { live_date, setLiveDate } = useContext(DateContext)
+  const { live_date, setLiveDate, selectedDate, setSelectedDate } =
+    useContext(DateContext)
   const { artistid, selectArtistId } = useContext(ArtistContext)
   const { locationid, selectLocationId } = useContext(LocationContext)
 
@@ -50,7 +51,9 @@ export const BulletinBoardCreateContainer = () => {
 
   return (
     <ImgUpContext.Provider value={{ live_image, setLiveImage }}>
-      <DateContext.Provider value={{ live_date, setLiveDate }}>
+      <DateContext.Provider
+        value={{ live_date, setLiveDate, selectedDate, setSelectedDate }}
+      >
         <LocationContext.Provider value={{ locationid, selectLocationId }}>
           <ArtistContext.Provider value={{ artistid, selectArtistId }}>
             <BulletinBoardCreatePresenter submitHandler={submitHandler} />
