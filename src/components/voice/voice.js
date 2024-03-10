@@ -1,36 +1,78 @@
-main()
+import React, { useState, useEffect } from 'react';
 
-async function main() {
-    const buttonStart = document.querySelector('#buttonStart')
-    const buttonStop = document.querySelector('#buttonStop')
-    const player = document.querySelector('#player')
+function App() {
+  const [stream, setStream] = useState(null);
+  const [mediaRecorder, setMediaRecorder] = useState(null);
+  const [isAudioSupported, setIsAudioSupported] = useState(true);
 
-    const stream = await navigator.mediaDevices.getUserMedia({ // <1>
-        video: false,
-        audio: true,
-    })
+  useEffect(() => {
+    const initializeMedia = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: false,
+          audio: true,
+        });
+        setStream(stream);
+        if (!MediaRecorder.isTypeSupported('audio/webm')) {
+          setIsAudioSupported(false);
+          console.warn('audio/webm is not supported');
+        }
+      } catch (error) {
+        console.error('Error accessing user media: ', error);
+      }
+    };
 
-    if (!MediaRecorder.isTypeSupported('audio/webm')) { // <2>
-        console.warn('audio/webm is not supported')
+    initializeMedia();
+
+    return () => {
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+      }
+    };
+  }, []);
+
+  const handleStartRecording = () => {
+    if (mediaRecorder) {
+      mediaRecorder.start();
     }
+  };
 
-    const mediaRecorder = new MediaRecorder(stream, { // <3>
+  const handleStopRecording = () => {
+    if (mediaRecorder) {
+      mediaRecorder.stop();
+    }
+  };
+
+  const handleDataAvailable = event => {
+    const player = document.querySelector('#player');
+    player.src = URL.createObjectURL(event.data);
+  };
+
+  useEffect(() => {
+    if (stream) {
+      const mediaRecorder = new MediaRecorder(stream, {
         mimeType: 'audio/webm',
-    })
+      });
+      mediaRecorder.addEventListener('dataavailable', handleDataAvailable);
+      setMediaRecorder(mediaRecorder);
+    }
+  }, [stream]);
 
-    buttonStart.addEventListener('click', () => {
-        mediaRecorder.start() // <4>
-        buttonStart.setAttribute('disabled', '')
-        buttonStop.removeAttribute('disabled')
-    })
-
-    buttonStop.addEventListener('click', () => {
-        mediaRecorder.stop() // <5>
-        buttonStart.removeAttribute('disabled')
-        buttonStop.setAttribute('disabled', '')
-    })
-
-    mediaRecorder.addEventListener('dataavailable', event => { // <6>
-        player.src = URL.createObjectURL(event.data)
-    })
+  return (
+    <div>
+      <button id="buttonStart" onClick={handleStartRecording} disabled={!stream}>
+        Start Recording
+      </button>
+      <button id="buttonStop" onClick={handleStopRecording} disabled={!stream}>
+        Stop Recording
+      </button>
+      {isAudioSupported ? (
+        <audio id="player" controls></audio>
+      ) : (
+        <p>Audio/webm is not supported</p>
+      )}
+    </div>
+  );
 }
+
+export default App;
