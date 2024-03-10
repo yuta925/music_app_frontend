@@ -40,7 +40,9 @@ export const BulletinBoardPresenter: FC<BulletinBoardCreateProps> = ({
           />
         </div>
         <div className="mt-8 mb-8 text-2xl flex justify-center items-center">
-          <select value={artist_id} onChange={selectArtist}>
+          <select 
+          value={artist_id} 
+          onChange={selectArtist}>
             <option value="">アーティスト</option>
             {artistOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -55,12 +57,12 @@ export const BulletinBoardPresenter: FC<BulletinBoardCreateProps> = ({
               <ImageListItem key={item.live_venue_id}>
                 <img
                   src={`${item.live_image}?w=248&fit=crop&auto=format`}
-                  // alt={item.live_venue_id}
+                  alt={item.live_venue_id}
                   loading="lazy"
                 />
                 <ImageListItemBar
-                  // title={item.title}
-                  // subtitle={<span>by: {item.author}</span>}
+                  title={item.title}
+                  subtitle={<span>by: {item.author}</span>}
                   position="below"
                 />
               </ImageListItem>
