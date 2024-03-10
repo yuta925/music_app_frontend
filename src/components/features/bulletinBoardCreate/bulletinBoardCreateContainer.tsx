@@ -42,7 +42,7 @@ export const BulletinBoardCreateContainer = () => {
   const createBulletin = useMutation({
     mutationFn: async (bulletin: BulletinCreate) =>
       await axios.post(
-        `${import.meta.env.VITE_APP_API}/builtinboards`,
+        `${import.meta.env.VITE_APP_API}/bulletin-board`,
         bulletin
       ),
     onSuccess() {
