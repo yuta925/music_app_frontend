@@ -27,5 +27,5 @@ export const ProfileContainer = () => {
     fetchProfile()
   }, [])
 
-  return <ProfilePresenter user_icon={userIcon} user_name={name} />
+  return <ProfilePresenter />
 }

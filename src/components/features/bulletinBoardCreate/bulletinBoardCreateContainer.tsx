@@ -3,16 +3,16 @@ import axios from 'axios'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BulletinBoardCreatePresenter } from './bulletinBoardCreatePresenter'
-import { DateContext } from '../../../ui/Select/dateSelect'
-import { ArtistContext } from '../../../ui/Select/artistSelect'
-import { LocationContext } from '../../../ui/Select/locationSelect'
+import { DateContext } from '../../../ui/select/dateSelect'
+import { ArtistContext } from '../../../ui/select/artistSelect'
+import { LocationContext } from '../../../ui/select/locationSelect'
 import { ImgUpContext } from '../../../ui/imgUp/imgUp'
 
 export type BulletinCreate = {
   live_image: string
   live_date: string
-  locationid: number
-  artistid: number
+  locationid: string
+  artistid: string
 }
 
 export const BulletinBoardCreateContainer = () => {

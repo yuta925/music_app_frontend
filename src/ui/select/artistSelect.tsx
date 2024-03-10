@@ -2,25 +2,24 @@ import { useState, createContext, useEffect } from 'react'
 import { artistOptions } from '../../assets/Options/artistOptions'
 
 export const ArtistContext = createContext<{
-  artistid: number
-  selectArtistId: React.Dispatch<React.SetStateAction<number>>
+  artistid: string
+  selectArtistId: React.Dispatch<React.SetStateAction<string>>
 }>(
   {} as {
-    artistid: number
-    selectArtistId: React.Dispatch<React.SetStateAction<number>>
+    artistid: string
+    selectArtistId: React.Dispatch<React.SetStateAction<string>>
   }
 )
 
 export const AristSelecBox = () => {
-  const [artistid, selectArtistId] = useState<number>(0)
+  const [artistid, selectArtistId] = useState<string>('')
 
   useEffect(() => {
     console.log(artistid)
   }, [artistid])
 
   const selectArtist = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedArtistId = Number(event.target.value)
-    selectArtistId(selectedArtistId)
+    selectArtistId(event.target.value)
   }
 
   return (

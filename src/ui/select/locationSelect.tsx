@@ -2,22 +2,21 @@ import { useState, createContext } from 'react'
 import { veneuOptions } from '../../assets/Options/venueOptions'
 
 export const LocationContext = createContext<{
-  locationid: number
-  selectLocationId: React.Dispatch<React.SetStateAction<number>>
+  locationid: string
+  selectLocationId: React.Dispatch<React.SetStateAction<string>>
 }>(
   {} as {
-    locationid: number
-    selectLocationId: React.Dispatch<React.SetStateAction<number>>
+    locationid: string
+    selectLocationId: React.Dispatch<React.SetStateAction<string>>
   }
 )
 
 export const LocationSelectBox = () => {
-  const [locationid, selectLocationId] = useState<number>(0)
+  const [locationid, selectLocationId] = useState<string>('')
 
   const selectLocation = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedLocationId = Number(event.target.value)
-    selectLocationId(selectedLocationId)
-    console.log(selectedLocationId)
+    selectLocationId(event.target.value)
+    console.log(locationid)
   }
 
   return (

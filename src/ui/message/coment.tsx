@@ -9,8 +9,8 @@ import PauseRounded from '@mui/icons-material/PauseRounded'
 import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded'
 import CurrentDate from '../getdate'
 import FireButton from '../firebutton/firebutton'
-import Header from '../header/header'
-import Footer from '../footer/footer'
+// import Header from '../header/header'
+// import Footer from '../footer/footer'
 
 const Widget = styled('div')(({ theme }) => ({
   padding: 16,
@@ -18,7 +18,7 @@ const Widget = styled('div')(({ theme }) => ({
   width: 343,
   maxWidth: '100%',
   margin: 'auto',
-  marginBottom:10,
+  marginBottom: 10,
   backgroundColor:
     theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.7)',
   backdropFilter: 'blur(40px)',
@@ -60,155 +60,141 @@ export default function MusicPlayerSlider() {
     //   <Header />
     //   <div className="flex-grow">
 
-          <Widget className="bg-slate-00">
-            <Box sx={{ display: 'flex-center', alignItems: 'center' }}>
+    <Widget className="bg-slate-00">
+      <Box sx={{ display: 'flex-center', alignItems: 'center' }}>
+        {/* アイコンのデータほしい */}
+        <CoverImage>
+          <img alt="" src="/static/images/sliders/chilling-sunday.jpg" />
+        </CoverImage>
 
-              {/* アイコンのデータほしい */}
-              <CoverImage>
-                <img alt="" src="/static/images/sliders/chilling-sunday.jpg" />
-              </CoverImage>
+        <Box sx={{ ml: 1.5, minWidth: 0, marginLeft: 0.5, marginRight: 2 }}>
+          {/* ユーザー名ほしい */}
+          <Typography noWrap sx={{ fontSize: 20 }}>
+            名前ごうえんじ
+          </Typography>
 
-              <Box
-                sx={{ ml: 1.5, minWidth: 0, marginLeft: 0.5, marginRight: 2 }}
-              >
+          {/* 投稿した日付と時間 */}
+          <Typography
+            noWrap
+            letterSpacing={-0.25}
+            sx={{ fontSize: 15, marginTop: 1 }}
+          >
+            {CurrentDate()}
+          </Typography>
+        </Box>
 
-                {/* ユーザー名ほしい */}
-                <Typography noWrap sx={{ fontSize: 20 }}>
-                  名前ごうえんじ
-                </Typography>
+        {/* もしいいねの数数えるならココ */}
+        <FireButton />
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center', // 親要素を右寄りに配置するスタイル
+          width: '90%',
+          height: 60,
+          margin: 'auto',
+          marginTop: 1,
+          backgroundColor: 'rgba(255, 255, 255, 0.5)',
+          borderRadius: 30,
+        }}
+      >
+        {/* 再生と停止ボタン */}
+        <IconButton
+          sx={{ marginLeft: 1, marginRight: 0 }}
+          aria-label={paused ? 'play' : 'pause'}
+          onClick={() => setPaused(!paused)}
+        >
+          {paused ? (
+            <PlayArrowRounded
+              sx={{ fontSize: '3rem' }}
+              htmlColor={mainIconColor}
+            />
+          ) : (
+            <PauseRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />
+          )}
+        </IconButton>
 
-                {/* 投稿した日付と時間 */}
-                <Typography
-                  noWrap
-                  letterSpacing={-0.25}
-                  sx={{ fontSize: 15, marginTop: 1 }}
-                >
-                  {CurrentDate()}
-                </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            mt: -2,
+          }}
+        >
+          {/* 再生した秒数 */}
+          <TinyText sx={{ marginTop: 2, fontSize: 16 }}>
+            {formatDuration(position)}
+          </TinyText>
 
-              </Box>
+          {/* 残りの秒数 */}
+          <TinyText sx={{ marginTop: 2, fontSize: 16 }}>
+            /{formatDuration(duration - position)}
+          </TinyText>
+        </Box>
 
-              {/* もしいいねの数数えるならココ */}
-              <FireButton />
+        {/* 音声再生バー （秒数とバーは連動してる）*/}
+        <Slider
+          aria-label="time-indicator"
+          size="small"
+          value={position}
+          min={0}
+          step={1}
+          max={duration}
+          onChange={(_, value) => setPosition(value as number)}
+          sx={{
+            color: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0,0,0,0.87)',
+            height: 12,
+            width: '35%',
+            marginLeft: 3,
+            '& .MuiSlider-thumb': {
+              width: 20,
+              height: 20,
+              transition: '0.3s cubic-bezier(.47,1.64,.41,.8)',
+              '&::before': {
+                boxShadow: '0 2px 12px 0 rgba(0,0,0,0.4)',
+              },
+              '&:hover, &.Mui-focusVisible': {
+                boxShadow: `0px 0px 0px 8px ${
+                  theme.palette.mode === 'dark'
+                    ? 'rgb(255 255 255 / 16%)'
+                    : 'rgb(0 0 0 / 16%)'
+                }`,
+              },
+              '&.Mui-active': {
+                width: 20,
+                height: 20,
+              },
+            },
+            '& .MuiSlider-rail': {
+              opacity: 0.28,
+            },
+          }}
+        />
 
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center', // 親要素を右寄りに配置するスタイル
-                width: '90%',
-                height: 60,
-                margin: 'auto',
-                marginTop: 1,
-                backgroundColor: 'rgba(255, 255, 255, 0.5)',
-                borderRadius: 30,
-              }}
-            >
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            mt: -1,
+          }}
+        ></Box>
+      </Box>
+      <Stack
+        spacing={2}
+        direction="row"
+        sx={{ mb: 1, px: 1 }}
+        alignItems="center"
+      ></Stack>
+    </Widget>
+    // </Box>
+    //   {/* </Box>
+    // </div>
+    // <div className="flex-grow">
+    //   <Footer />
+    // </div> */}
 
-              {/* 再生と停止ボタン */}
-              <IconButton
-                sx={{ marginLeft: 1, marginRight: 0 }}
-                aria-label={paused ? 'play' : 'pause'}
-                onClick={() => setPaused(!paused)}
-              >
-                {paused ? (
-                  <PlayArrowRounded
-                    sx={{ fontSize: '3rem' }}
-                    htmlColor={mainIconColor}
-                  />
-                ) : (
-                  <PauseRounded
-                    sx={{ fontSize: '3rem' }}
-                    htmlColor={mainIconColor}
-                  />
-                )}
-              </IconButton>
-
-
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  mt: -2,
-                }}
-              >
-
-                {/* 再生した秒数 */}
-                <TinyText sx={{ marginTop: 2, fontSize: 16 }}>
-                  {formatDuration(position)}
-                </TinyText>
-
-                {/* 残りの秒数 */}
-                <TinyText sx={{ marginTop: 2, fontSize: 16 }}>
-                  /{formatDuration(duration - position)}
-                </TinyText>
-
-              </Box>
-              
-              {/* 音声再生バー （秒数とバーは連動してる）*/}
-              <Slider
-                aria-label="time-indicator"
-                size="small"
-                value={position}
-                min={0}
-                step={1}
-                max={duration}
-                onChange={(_, value) => setPosition(value as number)}
-                sx={{
-                  color:
-                    theme.palette.mode === 'dark' ? '#fff' : 'rgba(0,0,0,0.87)',
-                  height: 12,
-                  width: '35%',
-                  marginLeft: 3,
-                  '& .MuiSlider-thumb': {
-                    width: 20,
-                    height: 20,
-                    transition: '0.3s cubic-bezier(.47,1.64,.41,.8)',
-                    '&::before': {
-                      boxShadow: '0 2px 12px 0 rgba(0,0,0,0.4)',
-                    },
-                    '&:hover, &.Mui-focusVisible': {
-                      boxShadow: `0px 0px 0px 8px ${
-                        theme.palette.mode === 'dark'
-                          ? 'rgb(255 255 255 / 16%)'
-                          : 'rgb(0 0 0 / 16%)'
-                      }`,
-                    },
-                    '&.Mui-active': {
-                      width: 20,
-                      height: 20,
-                    },
-                  },
-                  '& .MuiSlider-rail': {
-                    opacity: 0.28,
-                  },
-                }}
-              />
-
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  mt: -1,
-                }}
-              ></Box>
-            </Box>
-            <Stack
-              spacing={2}
-              direction="row"
-              sx={{ mb: 1, px: 1 }}
-              alignItems="center"
-            ></Stack>
-          </Widget>
-          // </Box>
-      //   {/* </Box>
-      // </div>
-      // <div className="flex-grow">
-      //   <Footer />
-      // </div> */}
-      
     // </div>
   )
 }

@@ -3,9 +3,9 @@ import IconButton from '@mui/material/IconButton'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import { Header2 } from '../../../ui/header/header2'
 import Footer from '../../../ui/footer/footer'
-import { Dateselect } from '../../../ui/Select/dateSelect'
-import { LocationSelectBox } from '../../../ui/Select/locationSelect'
-import { AristSelecBox } from '../../../ui/Select/artistSelect'
+import { Dateselect } from '../../../ui/select/dateSelect'
+import { LocationSelectBox } from '../../../ui/select/locationSelect'
+import { AristSelecBox } from '../../../ui/select/artistSelect'
 import { ImgUp } from '../../../ui/imgUp/imgUp'
 
 type BulletinBoardCreateProps = {

@@ -11,7 +11,9 @@ export const ImgUpContext = createContext<{
 )
 
 export const ImgUp = () => {
-  const [live_image, setLiveImage] = useState<string>('')
+  const [live_image, setLiveImage] = useState<string>(
+    'src/assets/images/sample.png'
+  )
 
   const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return
