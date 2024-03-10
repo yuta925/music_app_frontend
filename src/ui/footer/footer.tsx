@@ -2,8 +2,10 @@ import { Box, IconButton } from '@mui/material'
 import HomeIcon from '@mui/icons-material/Home'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import EditNoteIcon from '@mui/icons-material/EditNote'
+import { useNavigate } from 'react-router-dom'
 
 export default function Footer() {
+  const navigate = useNavigate()
   return (
     <Box
       sx={{
@@ -29,6 +31,7 @@ export default function Footer() {
             color: '#EA4335'
           }
         }}
+        onClick={()=>navigate('/create')}
       >
         <EditNoteIcon sx={{
           fontSize: 70
@@ -41,6 +44,7 @@ export default function Footer() {
             color: '#EA4335'
           }
         }}
+        onClick={()=>navigate('/home')}
       >
         <HomeIcon sx={{
           fontSize: 70
@@ -53,6 +57,7 @@ export default function Footer() {
             color: '#EA4335'
           }
         }}
+        onClick={()=>navigate('/profile')}
       >
         <AccountCircleIcon sx={{
           fontSize: 70
