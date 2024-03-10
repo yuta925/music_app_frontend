@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { BulletinBoardCreatePresenter } from './bulletinBoardCreatePresenter'
 
 export type BulletinCreate = {
@@ -17,6 +18,8 @@ export const BulletinBoardCreateContainer = () => {
   const [live_date, setLiveDate] = useState(Today)
   const [live_venue_id, setLiveVenueId] = useState(0)
   const [artist_id, setArtistId] = useState(0)
+
+  const navigate = useNavigate()
 
   // コンポーネント内の関数を定義
   const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,12 +45,12 @@ export const BulletinBoardCreateContainer = () => {
   const createBulletin = useMutation({
     mutationFn: async (bulletin: BulletinCreate) =>
       await axios.post(
-        `${import.meta.env.VITE_APP_API}/builtinboards`,
+        `${import.meta.env.VITE_APP_API}/bulletin-board`,
         bulletin
       ),
     onSuccess() {
       {
-        /* アラートを出す関数を呼び出す */
+        navigate('/home')
       }
     },
   })

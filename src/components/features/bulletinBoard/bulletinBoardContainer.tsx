@@ -1,53 +1,71 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { BulletinBoardPresenter } from './bulletinBoardPresenter'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { useMutation } from '@tanstack/react-query'
 
 export type BulletinBoards = {
   live_image: string
   live_venue_id: number
 }
 
+type getBulletins = {
+  live_date: Date
+  locationid: number
+  artistid: number
+  skip: number
+  limit: number
+}
+
 export const BulletinBoardContainer = () => {
-  const navigate = useNavigate()
-  const Today = new Date()
-  const [live_date, setLiveDate] = useState<Date>(Today)
-  const [artist_id, setArtistId] = useState<number>(0)
+  const date = new Date()
+  const [artistid, setArtistId] = useState<number>(0)
+  const [locationid, setLocationId] = useState<number>(0)
+  const [live_date, setLiveDate] = useState<Date>(new Date(date.toISOString()))
   const [bulletinBoards, setBulletinBoards] = useState<BulletinBoards[]>([])
 
-  useEffect(() => {
-    // Your existing code inside the useEffect callback
-    const getBulletins = async () => {
-      const res = await axios.get(
-        `${
-          import.meta.env.VITE_APP_API
-        }/bulletin-board/${live_date}/${artist_id}`
-      )
-      setBulletinBoards(res.data)
-    }
-    getBulletins().then()
-  }, [live_date, artist_id])
+  const useGetBulletins = useMutation({
+    mutationFn: async (bulletin: getBulletins) =>
+      await axios.get(`${import.meta.env.VITE_APP_API}/bulletin-board`, {
+        params: bulletin,
+      }),
+    onSuccess: (data) => {
+      console.log(data)
+      setBulletinBoards(data.data)
+    },
+  })
 
-  const selectLiveDate = (date: Date) => {
-    setLiveDate(date)
+  const fetchBulletins = async () => {
+    console.log('button clicked')
+    useGetBulletins.mutateAsync({
+      live_date: live_date,
+      artistid: artistid,
+      locationid: locationid,
+      skip: 20,
+      limit: 10,
+    })
   }
 
+  const selectLiveDate = (selectDate: Date) => {
+    setLiveDate(selectDate)
+  }
   const selectArtist = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setArtistId(Number(event.target.value))
   }
 
-  const enterBulletinBoard = () => {
-    navigate(`/bulletin-board/${live_date}/${artist_id}`)
+  const selectLocation = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setLocationId(Number(event.target.value))
   }
 
   return (
     <BulletinBoardPresenter
-      live_date={live_date}
-      artist_id={artist_id}
+      live_date={live_date || new Date()} // Provide a default value for live_date
+      artistid={artistid}
+      locationid={locationid}
       selectLiveDate={selectLiveDate}
       selectArtist={selectArtist}
+      selectLocation={selectLocation}
       bulletinBoards={bulletinBoards}
-      enterBulletinBoard={enterBulletinBoard}
+      enterBulletinBoard={fetchBulletins}
     />
   )
 }
