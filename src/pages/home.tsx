@@ -3,8 +3,6 @@ import { BulletinBoards } from '../components/features/bulletinBoard/bulletinBoa
 import { useState, createContext } from 'react'
 
 export const HomeContext = createContext<{
-  editModalIsOpen: boolean
-  setEditModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>
   selectedDate: Date
   setSelectedDate: React.Dispatch<React.SetStateAction<Date>>
   live_image: string
@@ -19,8 +17,6 @@ export const HomeContext = createContext<{
   setBulletinBoards: React.Dispatch<React.SetStateAction<BulletinBoards[]>>
 }>(
   {} as {
-    editModalIsOpen: boolean
-    setEditModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>
     selectedDate: Date
     setSelectedDate: React.Dispatch<React.SetStateAction<Date>>
     live_image: string
@@ -37,7 +33,6 @@ export const HomeContext = createContext<{
 )
 
 export const Home = () => {
-  const [editModalIsOpen, setEditModalIsOpen] = useState<boolean>(false)
   const date = new Date()
   const [selectedDate, setSelectedDate] = useState<Date>(
     new Date(date.toISOString())
@@ -50,8 +45,6 @@ export const Home = () => {
   return (
     <HomeContext.Provider
       value={{
-        editModalIsOpen: editModalIsOpen,
-        setEditModalIsOpen: setEditModalIsOpen,
         selectedDate: selectedDate,
         setSelectedDate: setSelectedDate,
         live_image: live_image,

@@ -21,13 +21,8 @@ type getBulletins = {
 }
 
 export const BulletinBoardContainer = () => {
-  const {
-    setBulletinBoards,
-    live_date,
-    artistid,
-    locationid,
-    setEditModalIsOpen,
-  } = useContext(HomeContext)
+  const { setBulletinBoards, live_date, artistid, locationid } =
+    useContext(HomeContext)
 
   const useGetBulletins = useMutation({
     mutationFn: async (bulletin: getBulletins) =>
@@ -55,15 +50,14 @@ export const BulletinBoardContainer = () => {
       })
       .then((data) => {
         console.log(data)
-        // setBulletinBoards(data.data)
-        setEditModalIsOpen(false)
+        setBulletinBoards(data.data)
       })
   }
 
   return (
     <BulletinBoardPresenter
       enterBulletinBoard={fetchBulletins}
-      // bulletinBoards={bulletinBoards}
+      bulletinBoards={useGetBulletins.data?.data}
     />
   )
 }

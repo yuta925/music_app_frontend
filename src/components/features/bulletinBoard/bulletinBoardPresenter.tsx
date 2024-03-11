@@ -2,16 +2,16 @@ import { FC } from 'react'
 import Footer from '../../../ui/footer/footer'
 import { Header } from '../../../ui/header/header'
 import { ImageList, ImageListItem } from '@mui/material'
-// import { BulletinBoards } from './bulletinBoardContainer'
+import { BulletinBoards } from './bulletinBoardContainer'
 import { useNavigate } from 'react-router-dom'
 
 type BulletinBoardCreateProps = {
-  // bulletinBoards: BulletinBoards[]
+  bulletinBoards: BulletinBoards[]
   enterBulletinBoard: () => Promise<void>
 }
 
 export const BulletinBoardPresenter: FC<BulletinBoardCreateProps> = ({
-  // bulletinBoards,
+  bulletinBoards,
   enterBulletinBoard,
 }) => {
   const navigate = useNavigate()
@@ -21,20 +21,22 @@ export const BulletinBoardPresenter: FC<BulletinBoardCreateProps> = ({
         <Header submitHandler={enterBulletinBoard} />
         <div className="-z-1 mt-[70px]">
           <ImageList gap={2}>
-            <ImageListItem key={2} className="mt-2 -z-0">
-              <img
-                srcSet="src/assets/images/superbeaver.png"
-                src="src/assets/images/superbeaver.png"
-                alt="大阪城ホール"
-                loading="lazy"
-              />
-              <button
-                onClick={() => navigate(`/home/1`)}
-                className="bg-white text-black"
-              >
-                {'大阪城ホール'}
-              </button>
-            </ImageListItem>
+            {bulletinBoards.map((item) => (
+              <ImageListItem key={item.BuiltinBoardId} className="mt-2 -z-0">
+                <img
+                  srcSet={`${item.ImageUrl}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                  src={`${item.ImageUrl}?w=164&h=164&fit=crop&auto=format`}
+                  alt={item.ArtistId}
+                  loading="lazy"
+                />
+                <button
+                  onClick={() => navigate(`/home/${item.BuiltinBoardId}`)}
+                  className="bg-white text-black"
+                >
+                  {item.BuiltinBoardId}
+                </button>
+              </ImageListItem>
+            ))}
           </ImageList>
         </div>
         <Footer />
