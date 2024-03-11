@@ -13,17 +13,10 @@ export type NestedModalProps = {
 
 export const NestedModal: FC<NestedModalProps> = ({ submitHandler }) => {
   const { editModalIsOpen, setEditModalIsOpen } = useContext(HomeContext)
-
+  setEditModalIsOpen(true)
   return (
     <div className="flex flex-auto mt-2 z-30">
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => {
-          setEditModalIsOpen(true)
-        }}
-        className="w-[75px] h-[30px]"
-      >
+      <Button variant="contained" color="primary" className="w-[75px] h-[30px]">
         <span className="text-xs">検索</span>
       </Button>
 

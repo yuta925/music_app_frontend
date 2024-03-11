@@ -25,7 +25,7 @@ export const ProfileContainer = () => {
   const [UserIcon, setUserIcon] = useState<string>(
     'src/assets/images/default.png'
   )
-  const [Name, setName] = useState<string>('')
+  const [Name, setName] = useState<string>('優太')
 
   const getUserProfile = useMutation({
     mutationFn: async (Name: string) =>

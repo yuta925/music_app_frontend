@@ -6,10 +6,6 @@ import { useContext } from 'react'
 import { ProfileContext } from './ProfileContainer'
 import { styled } from '@mui/system'
 
-type ProfileProps = {
-  getProfile: () => Promise<void>
-}
-
 const LoginCard = styled('div')({
   position: 'fixed',
   top: '50%',
@@ -25,8 +21,8 @@ const LoginCard = styled('div')({
     width: '90%', // 画面幅が768px以下の場合、横幅を90%に変更
   },
 })
-export const ProfilePresenter: FC<ProfileProps> = ({ getProfile }) => {
-  const { UserIcon, Name, setName } = useContext(ProfileContext)
+export const ProfilePresenter: FC = () => {
+  const { setName } = useContext(ProfileContext)
 
   const setUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value)
@@ -35,19 +31,20 @@ export const ProfilePresenter: FC<ProfileProps> = ({ getProfile }) => {
   return (
     <>
       <Header2 />
-      <div className="flex flex-col mt-20">
-        <img src={UserIcon} className="w-[50px] h-[50px] m-[20px]" />
+      <div className="flex flex-col mt-20 ">
+        <img
+          src="src/assets/images/image.png"
+          className="w-[150px] h-[150px] mx-[120px] mt-[20px] round rounded-full"
+        />
         <LoginCard>
           <TextField
-            value={Name}
-            label={Name}
+            value={'優太'}
+            label={'ユーザー名'}
             className="round rouded-lg"
+            disabled
             onChange={setUserName}
           />
         </LoginCard>
-        <button onClick={getProfile} className="text-white mt-[70px]">
-          ユーザー情報を取得する
-        </button>
       </div>
       <Footer />
     </>
