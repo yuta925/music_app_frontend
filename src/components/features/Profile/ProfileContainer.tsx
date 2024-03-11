@@ -13,7 +13,9 @@ export const ProfileContainer = () => {
   useEffect(() => {
     const getProufile = async () => {
       const response = await axios.get<UserProfile>(
-        `${import.meta.env.VITE_APP_API}/users/me`
+        `${import.meta.env.VITE_APP_API}/users/me`, {
+        params: user_name,
+      }
       )
       return response.data
     }
