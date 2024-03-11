@@ -2,10 +2,7 @@ import { useContext } from 'react'
 import { BulletinBoardPresenter } from './bulletinBoardPresenter'
 import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
-import { ModalContext } from '../../../ui/modal/modal'
-import { ArtistContext } from '../../../ui/select/artistSelect'
-import { LocationContext } from '../../../ui/select/locationSelect'
-import { DateContext } from '../../../ui/select/dateSelect'
+import { HomeContext } from '../../../pages/home'
 
 export type BulletinBoards = {
   BuiltinBoardId: number
@@ -24,12 +21,13 @@ type getBulletins = {
 }
 
 export const BulletinBoardContainer = () => {
-  const { editModalIsOpen, setEditModalIsOpen } = useContext(ModalContext)
-  const { live_date, setLiveDate, selectedDate, setSelectedDate } =
-    useContext(DateContext)
-  const { artistid, selectArtistId } = useContext(ArtistContext)
-  const { locationid, selectLocationId } = useContext(LocationContext)
-  // const [bulletinBoards, setBulletinBoards] = useState<BulletinBoards[]>([])
+  const {
+    setBulletinBoards,
+    live_date,
+    artistid,
+    locationid,
+    setEditModalIsOpen,
+  } = useContext(HomeContext)
 
   const useGetBulletins = useMutation({
     mutationFn: async (bulletin: getBulletins) =>
@@ -38,7 +36,7 @@ export const BulletinBoardContainer = () => {
       }),
     onSuccess: (data) => {
       console.log(data)
-      // setBulletinBoards(data.data)
+      setBulletinBoards(data.data)
     },
   })
 
@@ -63,19 +61,9 @@ export const BulletinBoardContainer = () => {
   }
 
   return (
-    <ModalContext.Provider value={{ editModalIsOpen, setEditModalIsOpen }}>
-      <DateContext.Provider
-        value={{ live_date, setLiveDate, selectedDate, setSelectedDate }}
-      >
-        <LocationContext.Provider value={{ locationid, selectLocationId }}>
-          <ArtistContext.Provider value={{ artistid, selectArtistId }}>
-            <BulletinBoardPresenter
-              enterBulletinBoard={fetchBulletins}
-              // bulletinBoards={bulletinBoards}
-            />
-          </ArtistContext.Provider>
-        </LocationContext.Provider>
-      </DateContext.Provider>
-    </ModalContext.Provider>
+    <BulletinBoardPresenter
+      enterBulletinBoard={fetchBulletins}
+      // bulletinBoards={bulletinBoards}
+    />
   )
 }

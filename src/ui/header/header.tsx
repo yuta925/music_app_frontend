@@ -27,11 +27,7 @@ export const Header: FC<NestedModalProps> = ({ submitHandler }) => {
           ファイアートルネード
         </Typography>
         <NestedModal submitHandler={submitHandler} />
-        <div style={{ marginLeft: 'auto' }}>
-          {/* <IconButton sx={{ color: 'white', '&:hover': { color: 'secondary.main' } }} >
-            <LogoutIcon sx={{ fontSize: 50 }} />
-          </IconButton> */}
-        </div>
+        <div style={{ marginLeft: 'auto' }}></div>
       </Box>
     </div>
   )

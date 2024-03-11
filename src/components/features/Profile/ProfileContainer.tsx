@@ -1,31 +1,54 @@
 import axios from 'axios'
 import { ProfilePresenter } from './ProfilePresenter'
-import { useState, useEffect } from 'react'
+import { useState, createContext } from 'react'
+import { useMutation } from '@tanstack/react-query'
 
 type UserProfile = {
-  userIcon: string
-  name: string
+  UserIcon: string
+  Name: string
 }
 
+export const ProfileContext = createContext<{
+  UserIcon: string
+  setUserIcon: React.Dispatch<React.SetStateAction<string>>
+  Name: string
+  setName: React.Dispatch<React.SetStateAction<string>>
+}>(
+  {} as {
+    UserIcon: string
+    setUserIcon: React.Dispatch<React.SetStateAction<string>>
+    Name: string
+    setName: React.Dispatch<React.SetStateAction<string>>
+  }
+)
 export const ProfileContainer = () => {
-  const [userIcon, setUserIcon] = useState('src/assets/images/default.png')
-  const [name, setName] = useState('yuta')
-  useEffect(() => {
-    const getProufile = async () => {
-      const response = await axios.get<UserProfile>(
-        `${import.meta.env.VITE_APP_API}/users/me`
-      )
-      return response.data
-    }
+  const [UserIcon, setUserIcon] = useState<string>(
+    'src/assets/images/default.png'
+  )
+  const [Name, setName] = useState<string>('')
 
-    const fetchProfile = async () => {
-      const userInfo = await getProufile()
-      setUserIcon(userInfo.userIcon)
-      setName(userInfo.name)
-    }
+  const getUserProfile = useMutation({
+    mutationFn: async (Name: string) =>
+      await axios.get<UserProfile>(`${import.meta.env.VITE_APP_API}/users/me`, {
+        params: { Name },
+      }),
+    onSuccess: (data) => {
+      console.log(data)
+      setUserIcon(data.data.UserIcon)
+    },
+  })
+  const fetchUserProfile = async () => {
+    console.log('button clicked')
+    getUserProfile.mutateAsync(Name).then((data) => {
+      console.log(data)
+      setUserIcon(data.data.UserIcon)
+      setName(data.data.Name)
+    })
+  }
 
-    fetchProfile()
-  }, [])
-
-  return <ProfilePresenter />
+  return (
+    <ProfileContext.Provider value={{ UserIcon, setUserIcon, Name, setName }}>
+      <ProfilePresenter getProfile={fetchUserProfile} />
+    </ProfileContext.Provider>
+  )
 }
