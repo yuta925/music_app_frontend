@@ -1,31 +1,54 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, createContext } from 'react'
 import { BulletinBoardPresenter } from './bulletinBoardPresenter'
 import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
-import { ModalContext } from '../../../ui/modal/modal'
-import { ArtistContext } from '../../../ui/select/aristSelect'
-import { LocationContext } from '../../../ui/select/locationSelect'
-import { DateContext } from '../../../ui/select/dateSelect'
+import { HomeContext } from '../../../pages/home'
+import { artistOptions } from '../../../assets/Options/artistOptions'
 
 export type BulletinBoards = {
-  live_image: string
-  live_venue_id: number
+  BuiltinBoardId: string
+  ImageUrl: string
+  Date: Date
+  LocationId: string
+  ArtistId: string
 }
 
 type getBulletins = {
-  live_date: Date
-  locationid: number
-  artistid: number
+  live_date: string
+  locationid: string
+  artistid: string
   skip: number
   limit: number
 }
 
+export const LiveContext = createContext<{
+  artistNames: setBulletins[]
+  setArtistNames: React.Dispatch<React.SetStateAction<setBulletins[]>>
+}>(
+  {} as {
+    artistNames: setBulletins[]
+    setArtistNames: React.Dispatch<React.SetStateAction<setBulletins[]>>
+  }
+)
+
+type setBulletins = {
+  BuiltinBoardId: string
+  ImageUrl: string
+  Date: Date
+  liveName: string
+  artistName: string
+}
+
 export const BulletinBoardContainer = () => {
-  const { editModalIsOpen, setEditModalIsOpen } = useContext(ModalContext)
-  const { live_date, setLiveDate } = useContext(DateContext)
-  const { artistid, selectArtistId } = useContext(ArtistContext)
-  const { locationid, selectLocationId } = useContext(LocationContext)
-  const [bulletinBoards, setBulletinBoards] = useState<BulletinBoards[]>([])
+  const {
+    setBulletinBoards,
+    live_date,
+    artistid,
+    locationid,
+    setEditModalIsOpen,
+  } = useContext(HomeContext)
+
+  const [artistNames, setArtistNames] = useState<setBulletins[]>([])
 
   const useGetBulletins = useMutation({
     mutationFn: async (bulletin: getBulletins) =>
@@ -35,32 +58,56 @@ export const BulletinBoardContainer = () => {
     onSuccess: (data) => {
       console.log(data)
       setBulletinBoards(data.data)
+      setEditModalIsOpen(true)
     },
   })
 
   const fetchBulletins = async () => {
     console.log('button clicked')
-    useGetBulletins.mutateAsync({
-      live_date: live_date,
-      artistid: artistid,
-      locationid: locationid,
-      skip: 0,
-      limit: 10,
-    })
+    useGetBulletins
+      .mutateAsync({
+        live_date: live_date,
+        artistid: artistid,
+        locationid: locationid,
+        skip: 0,
+        limit: 10,
+      })
+      .then((data) => {
+        artistOptions.find((name) =>
+          name.ArtistId === data.data.ArtistId
+            ? setArtistNames([
+                {
+                  BuiltinBoardId: data.data.BuiltinBoardId,
+                  ImageUrl: data.data.ImageUrl,
+                  Date: data.data.Date,
+                  liveName: data.data.LocationId,
+                  artistName: name.Name,
+                },
+              ])
+            : setArtistNames([
+                {
+                  BuiltinBoardId: data.data.BuiltinBoardId,
+                  ImageUrl: data.data.ImageUrl,
+                  Date: data.data.Date,
+                  liveName: data.data.LocationId,
+                  artistName: 'No artists',
+                },
+              ])
+        )
+        console.log(artistNames)
+        // artistOptions.map((name) => {
+        //   name.ArtistId === data.data.ArtistId
+        //     ? setArtistNames([name.Name])
+        //     : setArtistNames(['No artists'])
+        //   console.log(name.ArtistId)
+        //   console.log(artistNames)
+        // })
+      })
   }
 
   return (
-    <ModalContext.Provider value={{ editModalIsOpen, setEditModalIsOpen }}>
-      <DateContext.Provider value={{ live_date, setLiveDate }}>
-        <LocationContext.Provider value={{ locationid, selectLocationId }}>
-          <ArtistContext.Provider value={{ artistid, selectArtistId }}>
-            <BulletinBoardPresenter
-              enterBulletinBoard={fetchBulletins}
-              bulletinBoards={bulletinBoards}
-            />
-          </ArtistContext.Provider>
-        </LocationContext.Provider>
-      </DateContext.Provider>
-    </ModalContext.Provider>
+    <LiveContext.Provider value={{ artistNames, setArtistNames }}>
+      <BulletinBoardPresenter submitHandler={fetchBulletins} />
+    </LiveContext.Provider>
   )
 }

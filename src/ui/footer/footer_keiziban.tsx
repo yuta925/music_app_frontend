@@ -1,50 +1,50 @@
 import { Box, Button } from '@mui/material'
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice'
 import { useState } from 'react'
-import { useReactMediaRecorder } from "react-media-recorder";
+// import { useReactMediaRecorder } from 'react-media-recorder'
 
 const Footer2 = () => {
-  const [isClicked, setIsClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(false)
 
   const handleButtonClick = () => {
-    setIsClicked(!isClicked);
+    setIsClicked(!isClicked)
   }
 
-  const onSaveAudio = async (formData: any) => {
-    try {
-      const response = await fetch('/message', {
-        method: 'POST',
-        body: formData
-      });
-  
-      if (response.ok) {
-        console.log('File uploaded successfully');
-      } else {
-        console.error('Failed to upload file');
-      }
-    } catch (error) {
-      console.error('Error uploading file:', error);
-    }
-  };
+  // const onSaveAudio = async (formData: FormData) => {
+  //   try {
+  //     const response = await fetch('/message', {
+  //       method: 'POST',
+  //       body: formData,
+  //     })
 
+  //     if (response.ok) {
+  //       console.log('File uploaded successfully')
+  //     } else {
+  //       console.error('Failed to upload file')
+  //     }
+  //   } catch (error) {
+  //     console.error('Error uploading file:', error)
+  //   }
+  // }
 
+  // const { startRecording, stopRecording, mediaBlobUrl } = useReactMediaRecorder(
+  //   { audio: true }
+  // )
 
-  const { startRecording, stopRecording, mediaBlobUrl} =
-        useReactMediaRecorder({ audio: true });
+  // const handleSaveAudio = async () => {
+  //   if (mediaBlobUrl) {
+  //     const audioBlob = await fetch(mediaBlobUrl).then((r) => r.blob())
+  //     const audioFile = new File([audioBlob], 'voice.wav', {
+  //       type: 'audio/wav',
+  //     })
+  //     const formData = new FormData()
+  //     formData.append('file', audioFile)
 
-        const handleSaveAudio = async () => {
-          if (mediaBlobUrl) {
-            const audioBlob = await fetch(mediaBlobUrl).then((r) => r.blob());
-            const audioFile = new File([audioBlob], 'voice.wav', { type: 'audio/wav' });
-            const formData = new FormData();
-            formData.append('file', audioFile);
-        
-            onSaveAudio(formData); // 一つ目のプログラムで定義されている関数
-          } else {
-            console.error('mediaBlobUrl is null');
-          }
-        };
-        
+  //     onSaveAudio(formData) // 一つ目のプログラムで定義されている関数
+  //   } else {
+  //     console.error('mediaBlobUrl is null')
+  //   }
+  // }
 
   return (
     <Box
@@ -67,7 +67,11 @@ const Footer2 = () => {
     >
       {isClicked ? (
         <Button
-          onClick={() => {handleButtonClick(); stopRecording(); handleSaveAudio();}}
+          onClick={() => {
+            handleButtonClick()
+            stopRecording()
+            handleSaveAudio()
+          }}
           sx={{
             backgroundColor: 'white',
             borderRadius: '50%',
@@ -95,7 +99,10 @@ const Footer2 = () => {
         </Button>
       ) : (
         <Button
-          onClick={() => {handleButtonClick(); startRecording();}}
+          onClick={() => {
+            handleButtonClick()
+            startRecording()
+          }}
           sx={{
             backgroundColor: 'white',
             borderRadius: '50%',
@@ -114,4 +121,4 @@ const Footer2 = () => {
   )
 }
 
-export default Footer2;
+export default Footer2
