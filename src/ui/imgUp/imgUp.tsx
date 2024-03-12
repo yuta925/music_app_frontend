@@ -3,7 +3,7 @@ import { CreateContext } from '../../pages/create'
 
 export const ImgUp = () => {
   const { live_image, setLiveImage } = useContext(CreateContext)
-
+  setLiveImage('src/assets/images/sample.png')
   const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return
     const fileObject = e.target.files[0]

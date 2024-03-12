@@ -40,8 +40,13 @@ type setBulletins = {
 }
 
 export const BulletinBoardContainer = () => {
-  const { setBulletinBoards, live_date, artistid, locationid } =
-    useContext(HomeContext)
+  const {
+    setBulletinBoards,
+    live_date,
+    artistid,
+    locationid,
+    setEditModalIsOpen,
+  } = useContext(HomeContext)
 
   const [artistNames, setArtistNames] = useState<setBulletins[]>([])
 
@@ -53,6 +58,7 @@ export const BulletinBoardContainer = () => {
     onSuccess: (data) => {
       console.log(data)
       setBulletinBoards(data.data)
+      setEditModalIsOpen(true)
     },
   })
 

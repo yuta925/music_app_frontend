@@ -7,6 +7,8 @@ export const HomeContext = createContext<{
   setSelectedDate: React.Dispatch<React.SetStateAction<Date>>
   live_image: string
   setLiveImage: React.Dispatch<React.SetStateAction<string>>
+  editModalIsOpen: boolean
+  setEditModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>
   live_date: string
   setLiveDate: React.Dispatch<React.SetStateAction<string>>
   artistid: string
@@ -21,6 +23,8 @@ export const HomeContext = createContext<{
     setSelectedDate: React.Dispatch<React.SetStateAction<Date>>
     live_image: string
     setLiveImage: React.Dispatch<React.SetStateAction<string>>
+    editModalIsOpen: boolean
+    setEditModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>
     live_date: string
     setLiveDate: React.Dispatch<React.SetStateAction<string>>
     artistid: string
@@ -39,6 +43,7 @@ export const Home = () => {
   )
   const [live_date, setLiveDate] = useState<string>('')
   const [live_image, setLiveImage] = useState<string>(' ')
+  const [editModalIsOpen, setEditModalIsOpen] = useState<boolean>(false)
   const [artistid, setArtistId] = useState<string>('')
   const [locationid, setLocationId] = useState<string>('')
   const [bulletinBoards, setBulletinBoards] = useState<BulletinBoards[]>([])
@@ -49,6 +54,8 @@ export const Home = () => {
         setSelectedDate: setSelectedDate,
         live_image: live_image,
         setLiveImage: setLiveImage,
+        editModalIsOpen: editModalIsOpen,
+        setEditModalIsOpen: setEditModalIsOpen,
         live_date: live_date,
         setLiveDate: setLiveDate,
         artistid: artistid,

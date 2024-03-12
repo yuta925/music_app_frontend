@@ -25,7 +25,7 @@ export const BulletinBoardCreatePresenter: FC<BulletinBoardCreateProps> = ({
           <ArtistSelecBox />
           <div>
             <IconButton type="submit" className="mt-4 w-[50px]">
-              <AddCircleOutlineIcon sx={{ fontSize: 70, color: 'white' }} />
+              <AddCircleOutlineIcon sx={{ fontSize: 60, color: 'white' }} />
             </IconButton>
           </div>
         </div>

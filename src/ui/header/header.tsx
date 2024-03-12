@@ -4,31 +4,13 @@ import { FC } from 'react'
 
 export const Header: FC<NestedModalProps> = ({ submitHandler }) => {
   return (
-    <div className="z-10 bg-slate-900">
-      <Box
-        sx={{
-          position: 'fixed',
-          borderBottom: '2px solid white',
-          top: 0,
-          left: 0,
-          padding: 0,
-          margin: 0,
-          width: '100%',
-          height: 68,
-          borderRadius: 0,
-          bgcolor: '#333333',
-          display: 'flex',
-          justifyContent: 'space-around',
-          alignItems: 'center',
-        }}
-      >
-        {/* ここはへんこうする！！！ */}
-        <Typography variant="h5" sx={{ color: 'white', padding: 3 }}>
-          ファイアートルネード
-        </Typography>
+    <div className="z-10 bg-slate-900 grid grid-cols-2">
+      <Typography variant="h5" sx={{ color: 'white', padding: 3 }}>
+        Flame
+      </Typography>
+      <div className="grid justify-items-end">
         <NestedModal submitHandler={submitHandler} />
-        <div style={{ marginLeft: 'auto' }}></div>
-      </Box>
+      </div>
     </div>
   )
 }

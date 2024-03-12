@@ -11,7 +11,7 @@ export const ArtistSelecBox = () => {
   }
 
   return (
-    <div className="mt-4 mb-2 text-2xl flex justify-center items-center">
+    <div className="my-4 text-2xl flex justify-center items-center">
       <select
         value={artistid}
         onChange={selectArtist}
