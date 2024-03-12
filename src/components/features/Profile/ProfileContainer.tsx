@@ -48,7 +48,7 @@ export const ProfileContainer = () => {
 
   return (
     <ProfileContext.Provider value={{ UserIcon, setUserIcon, Name, setName }}>
-      <ProfilePresenter getProfile={fetchUserProfile} />
+      <ProfilePresenter />
     </ProfileContext.Provider>
   )
 }
