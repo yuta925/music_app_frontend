@@ -38,7 +38,7 @@ export const Home = () => {
     new Date(date.toISOString())
   )
   const [live_date, setLiveDate] = useState<string>('')
-  const [live_image, setLiveImage] = useState<string>('')
+  const [live_image, setLiveImage] = useState<string>(' ')
   const [artistid, setArtistId] = useState<string>('')
   const [locationid, setLocationId] = useState<string>('')
   const [bulletinBoards, setBulletinBoards] = useState<BulletinBoards[]>([])
