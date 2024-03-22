@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import LoginPresenter from './loginPresenter'
+import { LoginPresenter } from './loginPresenter'
 import { useState } from 'react'
 
 type UserLogin = {
@@ -10,9 +10,14 @@ type UserLogin = {
 }
 
 export const LoginContainer = () => {
-  const navigate = useNavigate()
-  const [email, setEmail] = useState('')
+  // ログインのためのstate
   const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
+
+  // ページ遷移のための関数
+  const navigate = useNavigate()
+
+  // post処理のための関数
   const login = useMutation({
     mutationFn: async (user: UserLogin) =>
       await axios.post(
@@ -24,6 +29,7 @@ export const LoginContainer = () => {
     },
   })
 
+  // ログイン処理のための関数
   const submitAuthhandler = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
@@ -33,6 +39,7 @@ export const LoginContainer = () => {
       password: password,
     })
   }
+
   return (
     <LoginPresenter
       email={email}

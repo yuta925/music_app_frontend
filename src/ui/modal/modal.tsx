@@ -1,10 +1,9 @@
-import { FC, useContext, useState } from 'react'
+import { FC, useContext } from 'react'
 import Modal from 'react-modal'
 import { Button } from '@mui/material'
 import { LocationSelectBox } from '../select/home/locationSelect'
 import { Dateselect } from '../select/home/dateSelect'
 import { ArtistSelecBox } from '../select/home/artistSelect'
-import { Box } from '@mui/system'
 import { HomeContext } from '../../pages/home'
 
 export type NestedModalProps = {
@@ -23,11 +22,11 @@ const customStyles = {
   },
 }
 
-const buttonStyles = {
-  content: {
-    spacing: 2,
-  },
-}
+// const buttonStyles = {
+//   content: {
+//     spacing: 2,
+//   },
+// }
 
 export const NestedModal: FC<NestedModalProps> = ({ submitHandler }) => {
   const { editModalIsOpen, setEditModalIsOpen } = useContext(HomeContext)

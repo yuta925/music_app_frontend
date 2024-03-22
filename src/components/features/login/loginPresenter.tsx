@@ -33,7 +33,7 @@ const RightAlignedButton = styled(Button)({
   paddingRight: '0', // ボタンの右側の余白を0に設定
 })
 
-const LoginPresenter: FC<LoginProps> = ({
+export const LoginPresenter: FC<LoginProps> = ({
   email,
   password,
   setEmail,
@@ -85,5 +85,3 @@ const LoginPresenter: FC<LoginProps> = ({
     </form>
   )
 }
-
-export default LoginPresenter
